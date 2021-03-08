@@ -4,21 +4,20 @@ import com.productservice.entity.Category;
 import com.productservice.entity.Product;
 import com.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/create")
+    @PostMapping("/product/create")
     public Product createProduct(){
 
         Product product = new Product();
@@ -33,8 +32,18 @@ public class ProductController {
         return productService.saveProduct(product);
     }
 
-    @GetMapping("/products")
+    @GetMapping("/get/products")
     public List<Product> getAllProduct(){
         return productService.fetchAllProduct();
+    }
+
+    @GetMapping("/get/product")
+    public Optional<Product> getSingleProduct(@RequestParam String productId){
+        return productService.fetchSingleProduct(productId);
+    }
+
+    @DeleteMapping("/remove/product")
+    public void deleteProduct(@RequestParam String productId){
+        productService.removeProduct(productId);
     }
 }

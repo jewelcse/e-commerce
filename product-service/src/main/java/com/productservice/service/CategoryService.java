@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -22,6 +23,16 @@ public class CategoryService {
     // fetch all category
     public List<Category> fetchAllCategory(){
         return categoryRepository.findAll();
+    }
+
+    // fetch single category
+    public Optional<Category> fetchSingleCategory(String categoryId){
+        return categoryRepository.findById(categoryId);
+    }
+
+    // remove category
+    public void removeCategory(String categoryId){
+        categoryRepository.deleteById(categoryId);
     }
 
 
