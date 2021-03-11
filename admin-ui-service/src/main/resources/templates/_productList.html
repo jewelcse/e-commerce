@@ -1,0 +1,77 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<header th:replace="layout :: header" />
+
+
+
+<body id="page-top">
+<div id="wrapper">
+
+    <nav th:replace="layout :: side-nav"/>
+
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav th:replace="layout :: top-nav"/>
+
+           <div class="container">
+               <div class="card">
+                   <div class="card-header">
+                       Product List
+                       <a class="float-right btn btn-primary"  th:href="@{/product/add}">Add Product</a>
+                   </div>
+                   <div class="card-body">
+                       <table class="table table-hover">
+                           <thead class="thead-dark">
+                           <tr>
+                               <th scope="col">#</th>
+                               <th scope="col">Title</th>
+                               <th scope="col">Category</th>
+                               <th scope="col">Img</th>
+                               <th scope="col">Price</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           <tr>
+                               <th scope="row">1</th>
+                               <td>Mark</td>
+                               <td>Otto</td>
+                               <td>@mdo</td>
+                               <td>@mdo</td>
+                           </tr>
+                           <tr>
+                               <th scope="row">2</th>
+                               <td>Jacob</td>
+                               <td>Thornton</td>
+                               <td>@fat</td>
+                               <td>@fat</td>
+                           </tr>
+                           <tr>
+                               <th scope="row">3</th>
+                               <td>Larry</td>
+                               <td>the Bird</td>
+                               <td>@twitter</td>
+                               <td>@twitter</td>
+                           </tr>
+                           </tbody>
+                       </table>
+                   </div>
+               </div>
+           </div>
+
+            <footer th:replace="layout :: footer"/>
+        </div>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+</div>
+
+
+<script type="text/javascript"  th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript"  th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript"  th:src="@{/js/chart.min.js}"></script>
+<script type="text/javascript"  th:src="@{/js/bs-init.js}"></script>
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script type="text/javascript"  th:src="@{/js/theme.js}"></script>
+
+</body>
+</html>

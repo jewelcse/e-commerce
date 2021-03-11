@@ -1,7 +1,6 @@
 package com.productservice.entity;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
@@ -11,15 +10,12 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
-public class Category {
+@Getter
+public class SubCategory1 {
 
-    @Id
     private String id;
-    private String categoryTitle;
-    private String categoryDescription;
-    private Set<SubCategory1> subCategory1s = new HashSet<>(0);
-
+    private String subCategory1Title;
+    private Set<SubCategory2> subCategory2s = new HashSet<>(0);
 
 }

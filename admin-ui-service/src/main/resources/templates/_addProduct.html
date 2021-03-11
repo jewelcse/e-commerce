@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<header th:replace="layout :: header" />
+
+
+
+<body id="page-top">
+<div id="wrapper">
+
+    <nav th:replace="layout :: side-nav"/>
+
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav th:replace="layout :: top-nav"/>
+
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        Add product
+                    </div>
+                    <div class="card-body">
+
+                        <form th:action="@{/product/store}" th:object="${product}" method="POST">
+                            <div class="form-group">
+                                <label for="productTitle">Product Title</label>
+                                <input type="text"
+                                       th:field="*{productTitle}"
+                                       class="form-control"
+                                       id="productTitle"
+                                       name="productTitle"
+                                       placeholder="title goes here..">
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select class="form-control" id="category"  th:field="*{category.categoryTitle}" name="category">
+                                    <option th:value="phone" >Phone</option>
+                                    <option th:value="PC">PC</option>
+                                    <option th:value="Laptop">Laptop</option>
+                                    <option th:value="Battery">Battery</option>
+                                    <option th:value="Light">Light</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productTitle">Product Img</label>
+                                <input type="text"
+                                       th:field="*{productImage}"
+                                       class="form-control"
+                                       id="productImage"
+                                       name="productImage"
+                                       placeholder="img path goes here..">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Product Price</label>
+                                <input
+                                        type="number"
+                                        id="price"
+                                        th:field="*{productPrice}"
+                                        name="productPrice">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="editor">Product Description</label>
+                                <textarea
+                                        class="form-control"
+                                        id="editor" rows="5"
+                                        th:field="*{productDescription}"
+                                        name="productDescription"></textarea>
+                            </div>
+
+                            <input type="submit" class="btn btn-primary" value="Add Product">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <footer th:replace="layout :: footer"/>
+        </div>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+</div>
+
+<script type="text/javascript"  th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript"  th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript"  th:src="@{/js/chart.min.js}"></script>
+<script type="text/javascript"  th:src="@{/js/bs-init.js}"></script>
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script type="text/javascript"  th:src="@{/js/theme.js}"></script>
+
+</body>
+</html>

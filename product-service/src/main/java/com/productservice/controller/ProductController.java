@@ -26,7 +26,9 @@ public class ProductController {
         product.setProductImagePath("htpps://www.img/two.jpg");
         product.setProductPrice(25.0);
 
-        Category category = new Category("Laravel","This is laravel");
+        Category category = new Category();
+        category.setCategoryTitle("PHP");
+        category.setCategoryDescription("PHP Description");
         product.setCategory(category);
 
         return productService.saveProduct(product);
