@@ -1,13 +1,16 @@
 package com.productservice.controller;
 
-import com.productservice.entity.Category;
 import com.productservice.entity.Product;
 import com.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -17,26 +20,49 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    /*
+    Admin Endpoint for add product
+     */
     @PostMapping("/product/create")
-    public Product createProduct(){
-
-        Product product = new Product();
-        product.setProductTitle("This is product two");
-        product.setProductDescription("This is product description two");
-        product.setProductImagePath("htpps://www.img/two.jpg");
-        product.setProductPrice(25.0);
-
-        Category category = new Category();
-        category.setCategoryTitle("PHP");
-        category.setCategoryDescription("PHP Description");
-        product.setCategory(category);
-
+    public Product createProduct(@RequestBody Product product){
         return productService.saveProduct(product);
     }
+    /*
+     Admin Endpoint for remove product
+     */
+    @GetMapping("/remove/product")
+    public Map<String,Boolean> removeProduct(@RequestParam String id){
+        Product product = productService.fetchSingleProduct(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found for this id :: " + id));
 
+        productService.removeProduct(product);
+
+       Map<String, Boolean> response = new HashMap<>();
+       response.put("deleted", Boolean.TRUE);
+       return response;
+    }
+
+//    @GetMapping("/remove/product/{id}")
+//    public Map<String,Boolean> deleteProduct(@PathVariable(value = "id")
+//                                                         String productId){
+//
+//        Product product = productService.fetchSingleProduct(productId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Product not found for this id :: " + productId));
+//
+//        productService.removeProduct(product);
+//
+//        Map<String, Boolean> response = new HashMap<>();
+//        response.put("deleted", Boolean.TRUE);
+//        return response;
+//    }
+
+    /*
+    User and Admin endpoint for get all product list
+     */
     @GetMapping("/get/products")
-    public List<Product> getAllProduct(){
-        return productService.fetchAllProduct();
+    public ResponseEntity<List<Product>> getAllProduct(){
+        List<Product> products = productService.fetchAllProduct();
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/get/product")
@@ -44,8 +70,5 @@ public class ProductController {
         return productService.fetchSingleProduct(productId);
     }
 
-    @DeleteMapping("/remove/product")
-    public void deleteProduct(@RequestParam String productId){
-        productService.removeProduct(productId);
-    }
+
 }

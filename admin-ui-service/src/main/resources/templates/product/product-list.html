@@ -11,41 +11,49 @@
         <div class="card">
             <div class="card-header">
                 Product List
-                <a class="float-right btn btn-primary"  th:href="@{/product/add}">Add Product</a>
+                <a class="float-right btn btn-primary"  th:href="@{/admin/product/add}">Add Product</a>
             </div>
             <div class="card-body">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Title</th>
                         <th scope="col">Category</th>
                         <th scope="col">Img</th>
                         <th scope="col">Price</th>
+                        <th scope="col" colspan="2" class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                        <td>@twitter</td>
-                    </tr>
+
+                    <div th:if="${#lists.isEmpty(products)}">
+                        <tr >
+                            <td colspan="5" class="text-center bg-danger text-white">Not Available any product</td>
+                        </tr>
+                    </div>
+                    <div th:unless="${#lists.isEmpty(products)}">
+
+                        <tr th:each="product: ${products}" class="bg-secondary text-white">
+                            <td th:text="${product.productTitle}" />
+                            <td th:text="${product.categoryTitle}" />
+                            <td th:text="${product.productImagePath}" />
+                            <td th:text="${product.productPrice}" />
+
+                            <td>
+                                <a th:href="@{/admin/product/edit/{id}(id=${product.id})}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/admin/product/remove/{id}(id=${product.id})}"
+                                   class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </div>
+
+
                     </tbody>
                 </table>
             </div>

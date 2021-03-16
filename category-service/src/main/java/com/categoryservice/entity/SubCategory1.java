@@ -1,4 +1,4 @@
-package com.adminuiservice.dto;
+package com.categoryservice.entity;
 
 import lombok.*;
 

@@ -9,10 +9,11 @@ import lombok.*;
 @Getter
 public class Product {
 
+    private String id;
     private String productTitle;
-    private Category category;
+    private String categoryTitle;
     private String productDescription;
-    private String productImage;
+    private String productImagePath;
     private double productPrice;
 
 }

@@ -1,10 +1,8 @@
-package com.productservice.entity;
+package com.categoryservice.entity;
 
 
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 public class SubCategory3 {
 
-    private String id;
+    private SubCategory2 subCategory2;
     private String subCategory3Title;
 
 }

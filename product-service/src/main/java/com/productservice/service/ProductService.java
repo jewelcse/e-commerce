@@ -21,7 +21,7 @@ public class ProductService {
 
     // fetch all product
     public List<Product> fetchAllProduct(){
-        return  productRepository.findAll();
+        return  productRepository.findAllByOrderByIdDesc();
     }
 
     // fetch single product
@@ -30,7 +30,7 @@ public class ProductService {
     }
 
     // delete product
-    public void removeProduct(String productId){
-         productRepository.deleteById(productId);
+    public void removeProduct(Product product){
+         productRepository.delete(product);
     }
 }

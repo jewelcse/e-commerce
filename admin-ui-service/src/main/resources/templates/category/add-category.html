@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<body>
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Add Category
+            </div>
+            <div class="card-body">
+                <form  method="POST">
+                    <div class="form-group">
+                        <label for="__CategoryTitle">Category Title</label>
+                        <input type="text"
+                               class="form-control"
+                               id="__CategoryTitle"
+                               name="__CategoryTitle"
+                               placeholder="__Category goes here..">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Add Category">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
