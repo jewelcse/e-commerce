@@ -1,10 +1,13 @@
 package com.categoryservice.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -12,6 +15,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity(name = "parent_categories")
+
 public class ParentCategory {
 
     @Id
@@ -22,11 +26,15 @@ public class ParentCategory {
     @Column(name = "category_title")
     private String ParentCategoryTitle;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne( optional = false)
     @JoinColumn(name = "grant_category_id", nullable = false)
     private GrandParentCategory grandParentCategory;
 
-    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY,
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "parentCategory",
             cascade = CascadeType.ALL)
     private List<Category> categories;
+
+
 }
