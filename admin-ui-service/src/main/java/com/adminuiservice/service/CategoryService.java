@@ -34,9 +34,7 @@ public class CategoryService implements RequestURLS {
         return parentCategories;
     }
 
-    public Map<String, Boolean> save(Category category) {
-
-        Map<String, Boolean> response = new HashMap<>();
+    public void save(Category category) {
 
         // set headers
         HttpHeaders headers = new HttpHeaders();
@@ -51,12 +49,5 @@ public class CategoryService implements RequestURLS {
         ResponseEntity<Category> responseEntity
                 =template.postForEntity(RequestURLS.CATEGORY_STORE_URL,request,Category.class);
 
-        if (responseEntity.getStatusCode().equals(200)){
-            response.put("status",true);
-        }
-        else {
-            response.put("status",false);
-        }
-        return response;
     }
 }

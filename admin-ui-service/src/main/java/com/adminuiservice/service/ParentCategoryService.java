@@ -23,10 +23,8 @@ public class ParentCategoryService implements RequestURLS {
     @Autowired
     private RestTemplate template;
 
-    public Map<String,Boolean> save(ParentCategory parentCategory) {
+    public void save(ParentCategory parentCategory) {
 
-
-        Map<String, Boolean> response = new HashMap<>();
 
         // set headers
         HttpHeaders headers = new HttpHeaders();
@@ -41,13 +39,9 @@ public class ParentCategoryService implements RequestURLS {
         ResponseEntity<ParentCategory> responseEntity
                 = template.postForEntity(RequestURLS.PARENT_CATEGORY_STORE_URL,request,ParentCategory.class);
 
+        System.out.println(responseEntity);
+        System.out.println(responseEntity.getStatusCode());
 
-        if (responseEntity.getStatusCode().equals(200)){
-            response.put("status",true);
-        }else {
-            response.put("status",false);
-        }
-        return response;
 
     }
 

@@ -4,6 +4,7 @@ package com.categoryservice.controller;
 import com.categoryservice.entity.Category;
 import com.categoryservice.entity.GrandParentCategory;
 import com.categoryservice.entity.ParentCategory;
+import com.categoryservice.request.CategoryDto;
 import com.categoryservice.service.CategoryService;
 import com.categoryservice.service.ParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,9 @@ public class CategoryController {
     private ParentCategoryService parentCategoryService;
 
     @PostMapping("/category/create")
-    public Category createCategory(@RequestBody Category category){
-        categoryService.saveCategory(category);
-        return category;
+    public CategoryDto createCategory(@RequestBody CategoryDto categoryDto){
+        categoryService.saveCategory(categoryDto);
+        return categoryDto;
     }
 
     @GetMapping("/get/categories")

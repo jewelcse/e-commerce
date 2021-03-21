@@ -6,8 +6,10 @@ import com.categoryservice.entity.GrandParentCategory;
 import com.categoryservice.entity.ParentCategory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.core.serializer.Serializer;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -16,12 +18,12 @@ import java.util.List;
 @Setter
 @Getter
 
-public class RequestParentCategory {
+public class ParentCategoryDto implements Serializable {
 
+    private String parentCategoryTitle;
 
-    private Category category;
+    private Long grandParentCategoryId;
 
-    private ParentCategory parentCategory;
 
 
 

@@ -18,7 +18,7 @@ public class ParentCategory {
 
     private String parentCategoryTitle;
 
-    private Long grandParenCategoryId;
+    private Long grandParentCategoryId;
 
 
 }

@@ -26,10 +26,10 @@ public class GrandParentCategory {
     private String GrandParentCategoryTitle;
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "grandParentCategory",
-            cascade = CascadeType.ALL)
-    private List<ParentCategory> parentCategories;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "grandParentCategory",
+//            cascade = CascadeType.ALL)
+//    private List<ParentCategory> parentCategories;
 
 
 

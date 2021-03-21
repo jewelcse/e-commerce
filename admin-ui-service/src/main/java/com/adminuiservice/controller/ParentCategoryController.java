@@ -41,12 +41,12 @@ public class ParentCategoryController {
     public RedirectView saveCategory(@ModelAttribute("parentCategory")
                                                          ParentCategory parentCategory){
 
-        Map<String,Boolean> response;
 
-        response = parentCategoryService.save(parentCategory);
 
-        System.out.println("[ParentCategoryController: saveCategory() ]"+response);
+        parentCategoryService.save(parentCategory);
         System.out.println(parentCategory);
+        System.out.println("[ParentCategoryController: saveCategory() ]");
+
 
         return new RedirectView("/categories");
     }

@@ -41,11 +41,8 @@ public class CategoryController {
     public RedirectView saveCategory(@ModelAttribute("category")
                                                          Category category){
 
-        Map<String,Boolean> response;
+        categoryService.save(category);
 
-        response = categoryService.save(category);
-
-        System.out.println("[CategoryController: saveCategory() ] "+ response);
         return new RedirectView("/categories");
     }
 

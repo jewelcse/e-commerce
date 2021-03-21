@@ -1,11 +1,8 @@
 package com.categoryservice.controller;
 
 
-import com.categoryservice.entity.GrandParentCategory;
 import com.categoryservice.entity.ParentCategory;
-import com.categoryservice.request.RequestParentCategory;
-import com.categoryservice.service.CategoryService;
-import com.categoryservice.service.GrandParentCategoryService;
+import com.categoryservice.request.ParentCategoryDto;
 import com.categoryservice.service.ParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +17,11 @@ public class ParentCategoryController {
 
 
     @PostMapping("/parent-category/create")
-    public ParentCategory createCategory(@RequestBody ParentCategory parentCategory){
+    public ParentCategoryDto createCategory(@RequestBody ParentCategoryDto parentCategoryDto){
 
-        System.out.println(parentCategory);
-        //parentCategoryService.saveGrandParentCategory(parentCategory);
-        return parentCategory;
+        System.out.println(parentCategoryDto);
+        parentCategoryService.saveParentCategory(parentCategoryDto);
+        return parentCategoryDto;
     }
 
     @GetMapping("/get/parent-categories")

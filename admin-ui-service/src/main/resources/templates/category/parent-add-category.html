@@ -28,7 +28,7 @@
                         <select class="form-control"
                                 id="GrandParentCategoryTitle"
                                 name="grandParentCategory"
-                                th:field="*{grandParenCategoryId}">
+                                th:field="*{grandParentCategoryId}">
 
                             <option th:each="gc : ${grandParentCategories}" th:value="${gc.id}" th:text="${gc.grandParentCategoryTitle}"/>
 

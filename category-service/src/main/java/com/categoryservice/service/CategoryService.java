@@ -2,7 +2,9 @@ package com.categoryservice.service;
 
 
 import com.categoryservice.entity.Category;
+import com.categoryservice.entity.ParentCategory;
 import com.categoryservice.repository.CategoryRepository;
+import com.categoryservice.request.CategoryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,15 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public void saveCategory(Category c) {
-        categoryRepository.save(c);
+    public void saveCategory(CategoryDto c) {
+        Category category = new Category();
+        category.setCategoryTitle(c.getCategoryTitle());
+
+        ParentCategory parentCategory = new ParentCategory();
+        parentCategory.setId(c.getParentCategoryId());
+
+        category.setParentCategory(parentCategory);
+        categoryRepository.save(category);
     }
 
     public List<Category> fetchAllCategory() {

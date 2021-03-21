@@ -1,13 +1,16 @@
 package com.categoryservice.service;
 
 
+import com.categoryservice.entity.GrandParentCategory;
 import com.categoryservice.entity.ParentCategory;
 import com.categoryservice.repository.ParentCategoryRepository;
-import com.categoryservice.request.RequestParentCategory;
+import com.categoryservice.request.ParentCategoryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -16,8 +19,16 @@ public class ParentCategoryService {
     @Autowired
     private ParentCategoryRepository parentCategoryRepository;
 
-    public void saveGrandParentCategory(ParentCategory pc) {
-        parentCategoryRepository.save(pc);
+    public void saveParentCategory(ParentCategoryDto pcd) {
+
+        ParentCategory parentCategory = new ParentCategory();
+        parentCategory.setParentCategoryTitle(pcd.getParentCategoryTitle());
+        GrandParentCategory gpc = new GrandParentCategory();
+        gpc.setId(pcd.getGrandParentCategoryId());
+        parentCategory.setGrandParentCategory(gpc);
+        // save to database
+        parentCategoryRepository.save(parentCategory);
+
     }
 
     public List<ParentCategory> fetchAllParentCategory() {
