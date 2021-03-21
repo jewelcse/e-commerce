@@ -27,9 +27,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
+
+                    <tr th:each="category: ${categories}">
+                        <td scope="row">1</td>
+                        <td th:text="${category.categoryTitle}" />
+                        <td th:text="${category.parentCategory.parentCategoryTitle}" />
+<!--                        <td th:text="${category.grandParentCategory.grandParentCategoryTitle}" />-->
+
 
                     </tr>
 

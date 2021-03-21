@@ -10,4 +10,5 @@ public interface RequestURLS {
 
     String FETCH_GRAND_PARENT_CATEGORIES_URL = BASE_URL+"/get/grand-parent-categories";
     String FETCH_PARENT_CATEGORIES_URL = BASE_URL+"/get/parent-categories";
+    String FETCH_CATEGORIES_URL = BASE_URL+"/get/categories";
 }
