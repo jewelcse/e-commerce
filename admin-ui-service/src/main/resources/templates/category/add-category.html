@@ -13,15 +13,29 @@
                 Add Category
             </div>
             <div class="card-body">
-                <form  method="POST">
+                <form  method="POST" th:action="@{/save/category}" th:object="${category}">
                     <div class="form-group">
-                        <label for="__CategoryTitle">Category Title</label>
+                        <label for="categoryTitle">Category Title</label>
                         <input type="text"
                                class="form-control"
-                               id="__CategoryTitle"
-                               name="__CategoryTitle"
-                               placeholder="__Category goes here..">
+                               id="categoryTitle"
+                               name="categoryTitle"
+                               th:field="*{categoryTitle}"
+                               placeholder="category Title goes here..">
                     </div>
+
+                    <div class="form-group">
+                        <label for="ParentCategoryTitle">Parent Category</label>
+                        <select class="form-control"
+                                id="ParentCategoryTitle"
+                                name="parentCategoryTitle"
+                                th:field="*{parentCategoryId}">
+
+                            <option th:each="pc : ${parentCategories}" th:value="${pc.id}" th:text="${pc.parentCategoryTitle}"/>
+
+                        </select>
+                    </div>
+
                     <input type="submit" class="btn btn-primary" value="Add Category">
                 </form>
             </div>

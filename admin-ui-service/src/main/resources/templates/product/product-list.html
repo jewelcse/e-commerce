@@ -26,12 +26,15 @@
                     </thead>
                     <tbody>
 
-                    <div th:if="${#lists.isEmpty(products)}">
-                        <tr >
-                            <td colspan="5" class="text-center bg-danger text-white">Not Available any product</td>
-                        </tr>
-                    </div>
-                    <div th:unless="${#lists.isEmpty(products)}">
+<!--                    <div th:if="${#lists.isEmpty(products)}">-->
+<!--                        <tr >-->
+<!--                            <td colspan="5" class="text-center bg-danger text-white">Not Available any product</td>-->
+<!--                        </tr>-->
+<!--                    </div>-->
+
+                    <tr th:if="${products.empty}">
+                        <td colspan="5" class="text-center bg-danger text-white"> No products Available </td>
+                    </tr>
 
                         <tr th:each="product: ${products}" class="bg-secondary text-white">
                             <td th:text="${product.productTitle}" />
@@ -51,8 +54,6 @@
                                 </a>
                             </td>
                         </tr>
-                    </div>
-
 
                     </tbody>
                 </table>

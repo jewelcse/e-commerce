@@ -3,6 +3,7 @@ package com.categoryservice.service;
 
 import com.categoryservice.entity.ParentCategory;
 import com.categoryservice.repository.ParentCategoryRepository;
+import com.categoryservice.request.RequestParentCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

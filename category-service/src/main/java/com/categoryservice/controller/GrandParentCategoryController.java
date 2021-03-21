@@ -4,10 +4,7 @@ package com.categoryservice.controller;
 import com.categoryservice.entity.GrandParentCategory;
 import com.categoryservice.service.GrandParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,14 +18,9 @@ public class GrandParentCategoryController {
     private GrandParentCategoryService grandParentCategoryService;
 
     @PostMapping("/grand-parent-category/create")
-    public GrandParentCategory createCategory(){
-
-        GrandParentCategory gp = new GrandParentCategory();
-        gp.setId(120L);
-        gp.setGrandParentCategoryTitle("Electronics");
-
-        grandParentCategoryService.saveGrandParentCategory(gp);
-        return gp;
+    public GrandParentCategory createCategory(@RequestBody GrandParentCategory grandParentCategory){
+        grandParentCategoryService.saveGrandParentCategory(grandParentCategory);
+        return grandParentCategory;
     }
 
     @GetMapping("/get/grand-parent-categories")

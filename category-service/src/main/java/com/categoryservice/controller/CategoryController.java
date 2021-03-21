@@ -7,10 +7,7 @@ import com.categoryservice.entity.ParentCategory;
 import com.categoryservice.service.CategoryService;
 import com.categoryservice.service.ParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,19 +24,9 @@ public class CategoryController {
     private ParentCategoryService parentCategoryService;
 
     @PostMapping("/category/create")
-    public Category createCategory(){
-
-        Category c = new Category();
-
-        c.setCategoryTitle("Sony Ultra TV");
-
-        List<ParentCategory> parentCategories =  parentCategoryService.fetchAllParentCategory();
-
-        c.setParentCategory(parentCategories.get(0));
-
-
-        categoryService.saveCategory(c);
-        return c;
+    public Category createCategory(@RequestBody Category category){
+        categoryService.saveCategory(category);
+        return category;
     }
 
     @GetMapping("/get/categories")

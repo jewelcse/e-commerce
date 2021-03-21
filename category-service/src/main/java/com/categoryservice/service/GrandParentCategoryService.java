@@ -15,8 +15,8 @@ public class GrandParentCategoryService {
     @Autowired
     private GrandParentCategoryRepository grandParentCategoryRepository;
 
-    public void saveGrandParentCategory(GrandParentCategory gp) {
-        grandParentCategoryRepository.save(gp);
+    public void saveGrandParentCategory(GrandParentCategory gpc) {
+        grandParentCategoryRepository.save(gpc);
     }
 
 //    public List<GrandParentCategory> fetchAllGrandParentCategory() {

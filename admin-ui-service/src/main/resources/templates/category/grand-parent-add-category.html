@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<body>
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Add Grand Parent Category Title
+            </div>
+            <div class="card-body">
+                <form  method="POST" th:action="@{/save/grand-parent-category}" th:object="${grandParentCategory}" >
+                    <div class="form-group">
+                        <label for="GrandParentCategoryTitle">Grand Parent Category Title</label>
+                        <input type="text"
+                               th:field="*{grandParentCategoryTitle}"
+                               class="form-control"
+                               id="GrandParentCategoryTitle"
+                               name="grandParentCategoryTitle"
+                               placeholder="Grand Parent Category Title goes here..">
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Add Category">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

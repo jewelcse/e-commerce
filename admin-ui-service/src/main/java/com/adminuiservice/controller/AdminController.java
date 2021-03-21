@@ -16,6 +16,9 @@ public class AdminController {
         return "dashboard";
     }
 
-
+    @GetMapping("/categories")
+    public String categoryList(){
+        return "category/category-list";
+    }
 
 }

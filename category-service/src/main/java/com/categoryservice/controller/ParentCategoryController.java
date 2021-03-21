@@ -3,14 +3,12 @@ package com.categoryservice.controller;
 
 import com.categoryservice.entity.GrandParentCategory;
 import com.categoryservice.entity.ParentCategory;
+import com.categoryservice.request.RequestParentCategory;
 import com.categoryservice.service.CategoryService;
 import com.categoryservice.service.GrandParentCategoryService;
 import com.categoryservice.service.ParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -20,23 +18,13 @@ public class ParentCategoryController {
     @Autowired
     private ParentCategoryService parentCategoryService;
 
-    @Autowired
-    private GrandParentCategoryService grandParentCategoryService;
 
     @PostMapping("/parent-category/create")
-    public ParentCategory createCategory(){
+    public ParentCategory createCategory(@RequestBody ParentCategory parentCategory){
 
-        ParentCategory pc = new ParentCategory();
-        pc.setId(120L);
-        pc.setParentCategoryTitle("TV");
-
-       List<GrandParentCategory> grandParentCategories =  grandParentCategoryService.fetchAllGrandParentCategory();
-
-       pc.setGrandParentCategory(grandParentCategories.get(0));
-
-
-        parentCategoryService.saveGrandParentCategory(pc);
-        return pc;
+        System.out.println(parentCategory);
+        //parentCategoryService.saveGrandParentCategory(parentCategory);
+        return parentCategory;
     }
 
     @GetMapping("/get/parent-categories")
