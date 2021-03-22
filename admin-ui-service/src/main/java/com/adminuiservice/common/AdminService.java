@@ -16,6 +16,8 @@ public interface AdminService {
     ResponseEntity<GrandParentCategory> saveGrandParentCategory(GrandParentCategory grandParentCategory);
 
     List<Product> getProducts();
+    Product getProductById(String productId);
+    ResponseEntity<Product> updateProduct(Product product);
     ResponseEntity<Product> saveProduct(Product product);
     ResponseEntity<Product> deleteProduct(String productId);
 

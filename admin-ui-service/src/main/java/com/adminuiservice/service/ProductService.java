@@ -68,4 +68,26 @@ public class ProductService {
         List<Categories> categories = adminServiceImp.getCategories();
         return categories;
     }
+
+
+    public Product getSingleProduct(String productId) {
+        return adminServiceImp.getProductById(productId);
+    }
+
+    public Map<String, Boolean> updateProduct(Product product) {
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("status",true);
+
+        ResponseEntity<Product> responseEntity
+                = adminServiceImp.updateProduct(product);
+
+        System.out.println(responseEntity);
+
+        if (responseEntity.getStatusCode() != HttpStatus.OK){
+            response.put("status",false);
+        }
+
+        return response;
+    }
 }

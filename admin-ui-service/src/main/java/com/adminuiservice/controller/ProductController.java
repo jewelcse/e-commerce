@@ -1,6 +1,7 @@
 package com.adminuiservice.controller;
 
 import com.adminuiservice.dto.Categories;
+import com.adminuiservice.dto.Category;
 import com.adminuiservice.dto.Product;
 import com.adminuiservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,35 @@ public class ProductController {
 
         return new RedirectView("/admin/products");
     }
+
+    @GetMapping("/product/edit/{id}")
+    public String updateProduct(Model model,@PathVariable("id") String productId){
+
+        Product product = productService.getSingleProduct(productId);
+
+        List<Categories> categories = productService.getCategories();
+
+        model.addAttribute("categories",categories);
+        model.addAttribute("product",product);
+
+
+        System.out.println("fetching.."+product);
+        return "product/edit-product";
+    }
+
+
+    @PostMapping("/product/update/{id}")
+    public RedirectView update(@ModelAttribute("product") Product product){
+
+        System.out.println("updating"+product);
+
+        Map<String, Boolean> response;
+        response = productService.updateProduct(product);
+        System.out.println("Updating product => "+response);
+
+        return new RedirectView("/admin/products");
+    }
+
 
 
 }
