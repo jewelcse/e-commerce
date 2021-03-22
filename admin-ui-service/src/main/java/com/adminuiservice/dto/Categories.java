@@ -14,7 +14,7 @@ public class Categories {
 
     private ParentCategory parentCategory;
 
-    private GrandParentCategory grandParentCategory;
+
 
 
 }

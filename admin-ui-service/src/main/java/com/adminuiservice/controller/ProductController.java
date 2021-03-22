@@ -1,11 +1,9 @@
 package com.adminuiservice.controller;
 
-import com.adminuiservice.common.AdminServiceImp;
 import com.adminuiservice.dto.Categories;
 import com.adminuiservice.dto.Product;
 import com.adminuiservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,18 +42,22 @@ public class ProductController {
 
     @PostMapping("/product/store")
     public RedirectView save(@ModelAttribute("product") Product product){
-        Product res = productService.storeProduct(product);
-        System.out.println("[ProductController] :"+res);
-        //return "product/product-list";
+
+        Map<String, Boolean> response;
+
+        response = productService.storeProduct(product);
+        System.out.println("Saving product => "+response);
+
         return new RedirectView("/admin/products");
     }
 
 
     @GetMapping("/product/remove/{id}")
     public RedirectView remove(@PathVariable("id") String id){
-        System.out.println("[Product Controller: ]"+id);
-        Map<String,Boolean> res = productService.removeProduct(id);
-        System.out.println(res);
+
+        Map<String,Boolean> response = productService.removeProduct(id);
+        System.out.println("Deleting product where ID "+ id +" "+" => "+response);
+
         return new RedirectView("/admin/products");
     }
 

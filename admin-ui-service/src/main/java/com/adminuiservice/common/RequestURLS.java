@@ -14,4 +14,6 @@ public interface RequestURLS {
     String FETCH_CATEGORIES_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/get/categories";
 
     String FETCH_PRODUCTS_URL = BASE_URL_FOR_PRODUCT_SERVICE+"/api/get/products";
+    String PRODUCT_STORE_URL = BASE_URL_FOR_PRODUCT_SERVICE+"/api/product/create";
+    String PRODUCT_REMOVE_URL = BASE_URL_FOR_PRODUCT_SERVICE+"/api/remove/product?id=";
 }

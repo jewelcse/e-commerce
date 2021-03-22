@@ -10,11 +10,14 @@ public interface AdminService {
     List<Categories> getCategories();
     List<ParentCategory> getParentCategories();
     List<GrandParentCategory>getGrandParentCategories();
-    List<Product> getProducts();
 
     ResponseEntity<Category> saveCategory(Category category);
     ResponseEntity<ParentCategory> saveParentCategory(ParentCategory parentCategory);
     ResponseEntity<GrandParentCategory> saveGrandParentCategory(GrandParentCategory grandParentCategory);
+
+    List<Product> getProducts();
+    ResponseEntity<Product> saveProduct(Product product);
+    ResponseEntity<Product> deleteProduct(String productId);
 
 
 }

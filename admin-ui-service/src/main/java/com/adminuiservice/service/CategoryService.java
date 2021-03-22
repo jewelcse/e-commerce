@@ -1,7 +1,6 @@
 package com.adminuiservice.service;
 
 
-import com.adminuiservice.common.AdminServiceImp;
 import com.adminuiservice.dto.Category;
 import com.adminuiservice.dto.ParentCategory;
 import org.springframework.beans.factory.annotation.Autowired;

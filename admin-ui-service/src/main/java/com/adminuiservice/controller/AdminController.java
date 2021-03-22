@@ -1,20 +1,16 @@
 package com.adminuiservice.controller;
 
-import com.adminuiservice.common.AdminServiceImp;
-import com.adminuiservice.common.RequestURLS;
+import com.adminuiservice.service.AdminServiceImp;
 import com.adminuiservice.dto.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
-public class AdminController extends AdminServiceImp {
+public class AdminController {
 
     @Autowired
     private AdminServiceImp adminServiceImp;
@@ -34,6 +30,7 @@ public class AdminController extends AdminServiceImp {
 
         List<Categories> categories = adminServiceImp.getCategories();
         model.addAttribute("categories",categories);
+        System.out.println(categories);
         return "category/category-list";
     }
 

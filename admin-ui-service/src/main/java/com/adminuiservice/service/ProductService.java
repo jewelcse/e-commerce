@@ -1,9 +1,10 @@
 package com.adminuiservice.service;
 
-import com.adminuiservice.common.AdminServiceImp;
 import com.adminuiservice.dto.Categories;
 import com.adminuiservice.dto.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,8 +22,20 @@ public class ProductService {
     @Autowired
     private AdminServiceImp adminServiceImp;
 
-    public Product storeProduct(Product product){
-        Product response = template.postForObject("http://localhost:8200/api/product/create",product,Product.class);
+    public Map<String, Boolean> storeProduct(Product product){
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("status",true);
+
+        ResponseEntity responseEntity
+                = adminServiceImp.saveProduct(product);
+
+        System.out.println(responseEntity);
+
+        if (responseEntity.getStatusCode() != HttpStatus.OK){
+            response.put("status",false);
+        }
+
         return response;
     }
 
@@ -35,14 +48,19 @@ public class ProductService {
     }
 
     public Map<String, Boolean> removeProduct(String id) {
-        Map< String, String > params = new HashMap< String, String >();
-        params.put("id", id);
-        System.out.println("[Product Service]" + id);
-        //template.getForObject("http://localhost:8200/api/remove/product",Product.class,params);
-        template.getForObject("http://localhost:8200/api/remove/product?id="+id,Product.class);
 
         Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
+        response.put("status",true);
+
+        ResponseEntity<Product> responseEntity
+                = adminServiceImp.deleteProduct(id);
+
+        System.out.println(responseEntity);
+
+        if (responseEntity.getStatusCode() != HttpStatus.OK){
+            response.put("status",false);
+        }
+
         return response;
     }
 

@@ -1,14 +1,18 @@
-package com.adminuiservice.common;
+package com.adminuiservice.service;
 
+import com.adminuiservice.common.AdminService;
+import com.adminuiservice.common.RequestURLS;
 import com.adminuiservice.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class AdminServiceImp implements AdminService {
 
     @Autowired
@@ -146,6 +150,60 @@ public class AdminServiceImp implements AdminService {
 
             if (status == HttpStatus.OK) {
                 return responseEntity;
+            }
+
+        }catch (HttpStatusCodeException e){
+            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+                return null;
+            }
+            throw e;
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Product> saveProduct(Product product) {
+
+        try{
+            // set headers
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            // set request body with headers
+            HttpEntity<Product> request =
+                    new HttpEntity<>(product,headers);
+
+            // post request
+            ResponseEntity<Product> responseEntity
+                    = template.postForEntity(RequestURLS.PRODUCT_STORE_URL, request, Product.class);
+
+            HttpStatus status = responseEntity.getStatusCode();
+
+            if (status == HttpStatus.OK) {
+                return responseEntity;
+            }
+
+        }catch (HttpStatusCodeException e){
+            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+                return null;
+            }
+            throw e;
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Product> deleteProduct(String productId) {
+
+        try {
+
+            ResponseEntity<Product> productResponseEntity
+                    = template.getForEntity(RequestURLS.PRODUCT_REMOVE_URL+productId,Product.class);
+
+            HttpStatus status = productResponseEntity.getStatusCode();
+
+            if (status == HttpStatus.OK) {
+                return productResponseEntity;
             }
 
         }catch (HttpStatusCodeException e){
