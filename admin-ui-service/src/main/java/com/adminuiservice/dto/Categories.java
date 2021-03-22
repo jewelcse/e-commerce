@@ -8,8 +8,13 @@ import lombok.*;
 @Setter
 @Getter
 public class Categories {
-    
+
+
     private String categoryTitle;
+
     private ParentCategory parentCategory;
+
     private GrandParentCategory grandParentCategory;
+
+
 }

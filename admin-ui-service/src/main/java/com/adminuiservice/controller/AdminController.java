@@ -1,5 +1,6 @@
 package com.adminuiservice.controller;
 
+import com.adminuiservice.common.AdminServiceImp;
 import com.adminuiservice.common.RequestURLS;
 import com.adminuiservice.dto.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-public class AdminController {
+public class AdminController extends AdminServiceImp {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private AdminServiceImp adminServiceImp;
 
     @GetMapping("/dashboard")
     public String dashboard(){
@@ -31,14 +32,8 @@ public class AdminController {
     @GetMapping("/categories")
     public String categoryList(Model model){
 
-
-        ResponseEntity<Categories[]> responseEntity
-                = restTemplate.getForEntity(RequestURLS.FETCH_CATEGORIES_URL,Categories[].class);
-
-        List<Categories> categories = Arrays.asList(responseEntity.getBody());
-
+        List<Categories> categories = adminServiceImp.getCategories();
         model.addAttribute("categories",categories);
-
         return "category/category-list";
     }
 

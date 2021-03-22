@@ -20,5 +20,7 @@ public class ParentCategory {
 
     private Long grandParentCategoryId;
 
+    private GrandParentCategory grandParentCategory;
+
 
 }

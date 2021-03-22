@@ -27,11 +27,8 @@
                     <div class="form-group">
                         <label for="category">Category</label>
                         <select class="form-control" id="category"  th:field="*{categoryTitle}" name="category">
-                            <option th:value="phone" >Phone</option>
-                            <option th:value="PC">PC</option>
-                            <option th:value="Laptop">Laptop</option>
-                            <option th:value="Battery">Battery</option>
-                            <option th:value="Light">Light</option>
+                            <option th:each="category : ${categories}" th:value="${category.categoryTitle}" th:text="${category.categoryTitle}"/>
+
                         </select>
                     </div>
 

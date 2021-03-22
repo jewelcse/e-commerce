@@ -18,4 +18,6 @@ public class Category {
 
     private Long parentCategoryId;
 
+    private ParentCategory parentCategory;
+
 }

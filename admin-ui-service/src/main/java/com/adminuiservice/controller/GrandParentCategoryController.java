@@ -35,6 +35,8 @@ public class GrandParentCategoryController {
 
         response = grandParentService.save(grandParentCategory);
 
+        System.out.println("Saving grand category => "+response);
+
         return new RedirectView("/categories");
     }
 

@@ -1,5 +1,7 @@
 package com.adminuiservice.controller;
 
+import com.adminuiservice.common.AdminServiceImp;
+import com.adminuiservice.dto.Categories;
 import com.adminuiservice.dto.Product;
 import com.adminuiservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,22 +21,23 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+
     @GetMapping("/products")
     public String productList(Model model){
 
-        ResponseEntity<List<Product>> responseEntity = productService.fetchAllProduct();
-        List<Product> products = responseEntity.getBody();
+        List<Product> products = productService.fetchAllProduct();
 
-        for (Product product : products) {
-          System.out.println(product);
-        }
-
+        System.out.println(products);
         model.addAttribute("products",products);
         return "product/product-list";
     }
 
     @GetMapping("/product/add")
     public String addProduct(Model model){
+
+        List<Categories> categories = productService.getCategories();
+
+        model.addAttribute("categories",categories);
         model.addAttribute("product", new Product());
         return "product/add-product";
     }

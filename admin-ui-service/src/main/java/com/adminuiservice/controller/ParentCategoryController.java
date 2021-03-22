@@ -2,7 +2,6 @@ package com.adminuiservice.controller;
 
 import com.adminuiservice.dto.GrandParentCategory;
 import com.adminuiservice.dto.ParentCategory;
-import com.adminuiservice.service.GrandParentCategoryService;
 import com.adminuiservice.service.ParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -41,14 +39,12 @@ public class ParentCategoryController {
     public RedirectView saveCategory(@ModelAttribute("parentCategory")
                                                          ParentCategory parentCategory){
 
+        Map<String,Boolean> response;
+        response = parentCategoryService.save(parentCategory);
 
-
-        parentCategoryService.save(parentCategory);
-        System.out.println(parentCategory);
-        System.out.println("[ParentCategoryController: saveCategory() ]");
-
-
+        System.out.println("Saving parent category => "+response);
         return new RedirectView("/categories");
+
     }
 
 }

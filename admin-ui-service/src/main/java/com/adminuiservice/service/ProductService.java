@@ -1,13 +1,12 @@
 package com.adminuiservice.service;
 
+import com.adminuiservice.common.AdminServiceImp;
+import com.adminuiservice.dto.Categories;
 import com.adminuiservice.dto.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,23 +18,20 @@ public class ProductService {
     @Autowired
     private RestTemplate template;
 
+    @Autowired
+    private AdminServiceImp adminServiceImp;
+
     public Product storeProduct(Product product){
         Product response = template.postForObject("http://localhost:8200/api/product/create",product,Product.class);
         return response;
     }
 
 
-    public ResponseEntity<List<Product>> fetchAllProduct() {
-        ResponseEntity<Product[]> responseEntity = template.getForEntity("http://localhost:8200/api/get/products", Product[].class);
+    public List<Product> fetchAllProduct() {
 
-        List<Product> products = Arrays.asList(responseEntity.getBody());
+        List<Product> products = adminServiceImp.getProducts();
 
-//
-//        for (Product product : products) {
-//            System.out.println(product);
-//        }
-
-        return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+        return products;
     }
 
     public Map<String, Boolean> removeProduct(String id) {
@@ -48,5 +44,10 @@ public class ProductService {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+    public List<Categories> getCategories() {
+        List<Categories> categories = adminServiceImp.getCategories();
+        return categories;
     }
 }
