@@ -1,4 +1,4 @@
-package com.adminuiservice.common;
+package com.adminuiservice.service;
 
 import com.adminuiservice.dto.*;
 import org.springframework.http.ResponseEntity;

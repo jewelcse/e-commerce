@@ -1,7 +1,9 @@
 package com.productservice.controller;
 
+import com.productservice.config.ProductConfig;
 import com.productservice.entity.Product;
 import com.productservice.service.ProductServiceImp;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +22,10 @@ public class ProductController {
     /*
     Admin Endpoint for add product
      */
+    @RabbitListener(queues = ProductConfig.PRODUCT_QUEUE)
     @PostMapping("/product/create")
     public Product createProduct(@RequestBody Product product){
+        System.out.println(product+" Product service");
         return productService.saveOrUpdateProduct(product);
     }
     /*

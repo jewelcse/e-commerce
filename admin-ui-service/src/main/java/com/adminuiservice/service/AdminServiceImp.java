@@ -1,6 +1,5 @@
 package com.adminuiservice.service;
 
-import com.adminuiservice.common.AdminService;
 import com.adminuiservice.common.RequestURLS;
 import com.adminuiservice.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ public class AdminServiceImp implements AdminService {
 
     @Autowired
     private RestTemplate template;
+
 
     @Override
     public List<Categories> getCategories() {
@@ -212,6 +212,11 @@ public class AdminServiceImp implements AdminService {
     public ResponseEntity<Product> saveProduct(Product product) {
 
         try{
+
+           /* rabbitTemplate.convertAndSend(ProductConfig.PRODUCT_EXCHANGE,
+                    ProductConfig.PRODUCT_ROUTING_KEY, product);*/
+
+
             // set headers
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -237,6 +242,7 @@ public class AdminServiceImp implements AdminService {
             throw e;
         }
         return null;
+
     }
 
     @Override
