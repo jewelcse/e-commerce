@@ -1,7 +1,7 @@
 package com.adminuiservice.controller;
 
-import com.adminuiservice.service.AdminServiceImp;
 import com.adminuiservice.dto.Categories;
+import com.adminuiservice.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private AdminServiceImp adminServiceImp;
+    private CategoryService categoryService;
 
 
 
@@ -26,7 +26,7 @@ public class AdminController {
     @GetMapping("/categories")
     public String categoryList(Model model){
 
-        List<Categories> categories = adminServiceImp.getCategories();
+        List<Categories> categories = categoryService.getCategories();
         model.addAttribute("categories",categories);
         System.out.println(categories);
         return "category/category-list";

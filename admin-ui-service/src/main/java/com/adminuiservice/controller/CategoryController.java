@@ -1,11 +1,10 @@
 package com.adminuiservice.controller;
 
 import com.adminuiservice.dto.Category;
-import com.adminuiservice.dto.GrandParentCategory;
 import com.adminuiservice.dto.ParentCategory;
-import com.adminuiservice.service.CategoryService;
-import com.adminuiservice.service.ParentCategoryService;
+import com.adminuiservice.service.CategoryServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +20,7 @@ public class CategoryController {
 
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryServiceImp categoryService;
 
 
     @GetMapping("/category/add")
@@ -41,8 +40,7 @@ public class CategoryController {
     public RedirectView saveCategory(@ModelAttribute("category")
                                                          Category category){
 
-        Map<String, Boolean> response;
-        response = categoryService.save(category);
+        ResponseEntity<Category> response = categoryService.save(category);
         System.out.println("Saving category => "+response);
         return new RedirectView("/categories");
     }

@@ -1,13 +1,14 @@
 package com.adminuiservice.controller;
 
-import com.adminuiservice.config.ProductConfig;
 import com.adminuiservice.dto.Categories;
-import com.adminuiservice.dto.Category;
 import com.adminuiservice.dto.Product;
-import com.adminuiservice.service.ProductService;
+import com.adminuiservice.service.CategoryServiceImp;
+import com.adminuiservice.service.GrandParentCategoryServiceImp;
+import com.adminuiservice.service.ParentCategoryServiceImp;
+import com.adminuiservice.service.ProductServiceImp;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,13 @@ import java.util.Map;
 public class ProductController {
 
     @Autowired
-    private ProductService productService;
+    private ProductServiceImp productService;
+    @Autowired
+    private CategoryServiceImp categoryService;
+    @Autowired
+    private GrandParentCategoryServiceImp grandParentCategoryService;
+    @Autowired
+    private ParentCategoryServiceImp parentCategoryService;
 
     @GetMapping("/products")
     @HystrixCommand(fallbackMethod = "getFallBackProducts")
@@ -44,7 +51,7 @@ public class ProductController {
     @GetMapping("/product/add")
     public String addProduct(Model model){
 
-        List<Categories> categories = productService.getCategories();
+        List<Categories> categories = categoryService.getCategories();
 
         model.addAttribute("categories",categories);
         model.addAttribute("product", new Product());
@@ -54,15 +61,9 @@ public class ProductController {
     @PostMapping("/product/store")
     public RedirectView save(@ModelAttribute("product") Product product){
 
-        Map<String, Boolean> response = null;
-
-        response.put("status",true);
-
         System.out.println(product + "admin ui product controller");
 
-        response = productService.storeProduct(product);
-
-
+        ResponseEntity<Product> response = productService.storeProduct(product);
 
         System.out.println("Saving product => "+response);
 
@@ -73,7 +74,7 @@ public class ProductController {
     @GetMapping("/product/remove/{id}")
     public RedirectView remove(@PathVariable("id") String id){
 
-        Map<String,Boolean> response = productService.removeProduct(id);
+        ResponseEntity<Product> response = productService.removeProduct(id);
         System.out.println("Deleting product where ID "+ id +" "+" => "+response);
 
         return new RedirectView("/admin/products");
@@ -84,7 +85,7 @@ public class ProductController {
 
         Product product = productService.getSingleProduct(productId);
 
-        List<Categories> categories = productService.getCategories();
+        List<Categories> categories = categoryService.getCategories();
 
         model.addAttribute("categories",categories);
         model.addAttribute("product",product);
@@ -100,9 +101,8 @@ public class ProductController {
 
         System.out.println("updating"+product);
 
-        Map<String, Boolean> response;
-        response = productService.updateProduct(product);
-        System.out.println("Updating product => "+response);
+        productService.updateProduct(product);
+        System.out.println("Updating product => ");
 
         return new RedirectView("/admin/products");
     }
