@@ -32,6 +32,11 @@ public class CategoryServiceImp  implements CategoryService{
     }
 
     @Override
+    public Category getCategoryByTitle(String categoryTitle) {
+        return template.getForObject(RequestURLS.FETCH_CATEGORY_BY_TITLE_URL+categoryTitle,Category.class);
+    }
+
+    @Override
     public List<Categories> getFallBackCategories(){
         List<Categories> categories = new ArrayList<>();
         return categories;

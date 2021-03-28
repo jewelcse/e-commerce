@@ -1,6 +1,7 @@
 package com.adminuiservice.controller;
 
 import com.adminuiservice.dto.Categories;
+import com.adminuiservice.dto.Category;
 import com.adminuiservice.dto.Product;
 import com.adminuiservice.service.CategoryServiceImp;
 import com.adminuiservice.service.GrandParentCategoryServiceImp;
@@ -61,8 +62,12 @@ public class ProductController {
     @PostMapping("/product/store")
     public RedirectView save(@ModelAttribute("product") Product product){
 
-        System.out.println(product + "admin ui product controller");
 
+        Category category = categoryService.getCategoryByTitle(product.getCategory().getCategoryTitle());
+
+        product.setCategory(category);
+
+        System.out.println("admin controller" + product);
         ResponseEntity<Product> response = productService.storeProduct(product);
 
         System.out.println("Saving product => "+response);

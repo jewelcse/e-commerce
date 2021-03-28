@@ -1,13 +1,11 @@
-package com.adminuiservice.dto;
+package com.productservice.dto;
 
 import lombok.*;
-
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 
 public class Category {
 

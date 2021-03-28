@@ -10,6 +10,7 @@ import java.util.List;
 public interface CategoryService {
 
     List<Categories> getCategories();
+    Category getCategoryByTitle(String categoryTitle);
     List<Categories> getFallBackCategories();
     List<ParentCategory> fetchAllParentCategories();
     ResponseEntity<Category> save(Category category);

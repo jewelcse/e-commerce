@@ -27,7 +27,11 @@
                     <div class="form-group">
                         <label for="category">Category</label>
 
-                        <select class="form-control" id="category"  th:field="*{categoryTitle}" name="category">
+                        <select class="form-control" id="category"  th:field="*{category.categoryTitle}" name="category">
+
+                            <span th:if="${categories.empty}">
+                                <option class="text-center bg-danger text-white" th:value="0">Service is Down</option>
+                            </span>
                             <option th:each="category : ${categories}" th:value="${category.categoryTitle}" th:text="${category.categoryTitle}"/>
 
                         </select>

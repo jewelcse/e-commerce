@@ -10,7 +10,7 @@ public class Product {
 
     private String id;
     private String productTitle;
-    private String categoryTitle;
+    private Category category;
     private String productDescription;
     private String productImagePath;
     private double productPrice;

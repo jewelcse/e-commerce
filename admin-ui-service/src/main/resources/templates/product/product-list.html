@@ -32,7 +32,7 @@
 
                         <tr th:each="product: ${products}" class="bg-secondary text-white">
                             <td th:text="${product.productTitle}" />
-                            <td th:text="${product.categoryTitle}" />
+                            <td th:text="${product.getCategory().getCategoryTitle()}" />
                             <td th:text="${product.productImagePath}" />
                             <td th:text="${product.productPrice}" />
 

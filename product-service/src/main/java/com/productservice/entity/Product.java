@@ -1,6 +1,7 @@
 package com.productservice.entity;
 
 
+import com.productservice.dto.Category;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,7 +15,7 @@ public class Product {
     @Id
     private String id;
     private String productTitle;
-    private String categoryTitle;
+    private Category category;
     private String productDescription;
     private String productImagePath;
     private double productPrice;

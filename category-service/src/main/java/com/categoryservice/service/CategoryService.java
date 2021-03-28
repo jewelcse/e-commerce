@@ -40,4 +40,8 @@ public class CategoryService {
     public void remove(Category c) {
         categoryRepository.delete(c);
     }
+
+    public Optional<Category> fetchCategoryByTitle(String categoryTitle) {
+        return categoryRepository.findByCategoryTitle(categoryTitle);
+    }
 }

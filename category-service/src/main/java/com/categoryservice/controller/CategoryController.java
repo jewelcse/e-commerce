@@ -41,6 +41,12 @@ public class CategoryController {
         return categoryService.fetchSingleCategory(id);
     }
 
+    @GetMapping("/get/categoryByTitle")
+    public Optional<Category> getSingleCategoryByCategoryTitle(@RequestParam("categoryTitle") String categoryTitle){
+
+        return categoryService.fetchCategoryByTitle(categoryTitle);
+    }
+
     @GetMapping("/delete/category")
     public Map<String,Boolean> deleteCategory(@RequestParam() Long id){
         Category c = categoryService.fetchSingleCategory(id)

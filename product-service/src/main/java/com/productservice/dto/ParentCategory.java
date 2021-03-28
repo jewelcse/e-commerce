@@ -1,10 +1,7 @@
-package com.adminuiservice.dto;
+package com.productservice.dto;
 
 
 import lombok.*;
-
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +13,6 @@ public class ParentCategory {
     private Long id;
 
     private String parentCategoryTitle;
-
 
     private GrandParentCategory grandParentCategory;
 

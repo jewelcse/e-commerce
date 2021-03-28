@@ -1,9 +1,7 @@
-package com.adminuiservice.dto;
+package com.productservice.dto;
 
 
 import lombok.*;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
