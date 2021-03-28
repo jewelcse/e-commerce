@@ -9,11 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
-import java.util.Map;
+
 
 @Controller
 public class CategoryController {
@@ -42,6 +43,16 @@ public class CategoryController {
 
         ResponseEntity<Category> response = categoryService.save(category);
         System.out.println("Saving category => "+response);
+        return new RedirectView("/categories");
+    }
+
+    @GetMapping("/category/remove/{id}")
+    public RedirectView removeCategory(@PathVariable("id") int id){
+
+
+        System.out.println("delete category id " + id);
+        categoryService.removeCategory(id);
+
         return new RedirectView("/categories");
     }
 

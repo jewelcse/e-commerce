@@ -17,7 +17,7 @@ public class GrandParentCategoryServiceImp implements GrandParentCategoryService
     @Autowired
     private RestTemplate template;
 
-    @HystrixCommand(fallbackMethod = "saveFallbackForGrandParentCategory")
+    //@HystrixCommand(fallbackMethod = "saveFallbackForGrandParentCategory")
     @Override
     public GrandParentCategory save(GrandParentCategory grandParentCategory) {
 

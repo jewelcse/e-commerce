@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div layout:fragment="content">
+
+    <div class="container">
+
+        <div class="card">
+            <div class="card-header bg-gradient-light" >
+                Title <h3 th:text="${product.productTitle}" ></h3>
+            </div>
+            <div class="card-body">
+                Category
+                <h5 class="card-text">
+                    <span th:text="${product.category.categoryTitle}" /> ->
+                    <span th:text="${product.category.parentCategory.parentCategoryTitle}" /> ->
+                    <span th:text="${product.category.parentCategory.grandParentCategory.grandParentCategoryTitle}" />
+
+                </h5>
+
+                Price (৳)
+                <h5 th:text="${product.productPrice}"></h5>
+                Image
+                <img src="@{/static/img/avatars/product.png" alt="product Img">
+
+                Description
+                <p th:text="${product.productDescription}"></p>
+
+
+
+            </div>
+
+    </div>
+
+</div>
+</body>
+</html>

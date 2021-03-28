@@ -15,6 +15,8 @@ public class Category {
 
     private String categoryTitle;
 
+    private Long parentCategoryId;
+
     private ParentCategory parentCategory;
 
 }

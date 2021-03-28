@@ -21,7 +21,7 @@
                         <th scope="col">Category</th>
                         <th scope="col">Img</th>
                         <th scope="col">Price</th>
-                        <th scope="col" colspan="2" class="text-center">Action</th>
+                        <th scope="col" colspan="3" class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,6 +35,12 @@
                             <td th:text="${product.getCategory().getCategoryTitle()}" />
                             <td th:text="${product.productImagePath}" />
                             <td th:text="${product.productPrice}" />
+
+                            <td>
+                                <a th:href="@{/admin/product/view/{id}(id=${product.id})}" class="btn btn-primary">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
+                            </td>
 
                             <td>
                                 <a th:href="@{/admin/product/edit/{id}(id=${product.id})}" class="btn btn-primary">

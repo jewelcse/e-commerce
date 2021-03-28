@@ -2,8 +2,8 @@ package com.adminuiservice.service;
 
 
 import com.adminuiservice.common.RequestURLS;
-import com.adminuiservice.dto.Categories;
 import com.adminuiservice.dto.Category;
+import com.adminuiservice.dto.GrandParentCategory;
 import com.adminuiservice.dto.ParentCategory;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,23 +22,40 @@ public class CategoryServiceImp  implements CategoryService{
 
     @HystrixCommand(fallbackMethod = "getFallBackCategories")
     @Override
-    public List<Categories> getCategories() {
-        ResponseEntity<Categories[]> responseEntity
-                = template.getForEntity(RequestURLS.FETCH_CATEGORIES_URL,Categories[].class);
+    public List<Category> getCategories() {
+        ResponseEntity<Category[]> responseEntity
+                = template.getForEntity(RequestURLS.FETCH_CATEGORIES_URL,Category[].class);
 
-        List<Categories> categories = Arrays.asList(responseEntity.getBody());
+        List<Category> categories = Arrays.asList(responseEntity.getBody());
 
         return categories;
     }
 
+    //@HystrixCommand(fallbackMethod = "getFallbackCategoryByTitle")
     @Override
     public Category getCategoryByTitle(String categoryTitle) {
         return template.getForObject(RequestURLS.FETCH_CATEGORY_BY_TITLE_URL+categoryTitle,Category.class);
     }
 
+    private Category getFallbackCategoryByTitle(){
+
+        Category category = new Category();
+        category.setCategoryTitle("Service is Down");
+
+        ParentCategory parentCategory = new ParentCategory();
+        parentCategory.setParentCategoryTitle("Service is Down");
+
+        GrandParentCategory grandParentCategory = new GrandParentCategory();
+        grandParentCategory.setGrandParentCategoryTitle("Service is Down");
+
+        parentCategory.setGrandParentCategory(grandParentCategory);
+        category.setParentCategory(parentCategory);
+
+        return category;
+    }
     @Override
-    public List<Categories> getFallBackCategories(){
-        List<Categories> categories = new ArrayList<>();
+    public List<Category> getFallBackCategories(){
+        List<Category> categories = new ArrayList<>();
         return categories;
     }
 
@@ -91,4 +108,14 @@ public class CategoryServiceImp  implements CategoryService{
         return null;
 
     }
+
+
+    @Override
+    public void removeCategory(int id) {
+
+         template.getForEntity(RequestURLS.CATEGORY_REMOVE_URL+id,Category.class);
+
+    }
+
+
 }

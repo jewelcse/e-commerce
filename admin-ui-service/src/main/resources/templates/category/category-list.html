@@ -24,6 +24,7 @@
                         <th scope="col">Category</th>
                         <th scope="col">_Category</th>
                         <th scope="col">__Category</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,12 @@
                         <td th:text="${category.parentCategory.parentCategoryTitle}" />
                        <td th:text="${category.parentCategory.grandParentCategory.grandParentCategoryTitle}" />
 
+                        <td>
+                            <a th:href="@{/category/remove/{id}(id=${category.id})}"
+                               class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
 
                     </tr>
 

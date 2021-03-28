@@ -1,12 +1,8 @@
 package com.adminuiservice.controller;
 
-import com.adminuiservice.dto.Categories;
 import com.adminuiservice.dto.Category;
 import com.adminuiservice.dto.Product;
-import com.adminuiservice.service.CategoryServiceImp;
-import com.adminuiservice.service.GrandParentCategoryServiceImp;
-import com.adminuiservice.service.ParentCategoryServiceImp;
-import com.adminuiservice.service.ProductServiceImp;
+import com.adminuiservice.service.*;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +13,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("admin")
@@ -27,10 +22,7 @@ public class ProductController {
     private ProductServiceImp productService;
     @Autowired
     private CategoryServiceImp categoryService;
-    @Autowired
-    private GrandParentCategoryServiceImp grandParentCategoryService;
-    @Autowired
-    private ParentCategoryServiceImp parentCategoryService;
+
 
     @GetMapping("/products")
     @HystrixCommand(fallbackMethod = "getFallBackProducts")
@@ -52,7 +44,7 @@ public class ProductController {
     @GetMapping("/product/add")
     public String addProduct(Model model){
 
-        List<Categories> categories = categoryService.getCategories();
+        List<Category> categories = categoryService.getCategories();
 
         model.addAttribute("categories",categories);
         model.addAttribute("product", new Product());
@@ -90,7 +82,7 @@ public class ProductController {
 
         Product product = productService.getSingleProduct(productId);
 
-        List<Categories> categories = categoryService.getCategories();
+        List<Category> categories = categoryService.getCategories();
 
         model.addAttribute("categories",categories);
         model.addAttribute("product",product);
@@ -112,6 +104,14 @@ public class ProductController {
         return new RedirectView("/admin/products");
     }
 
+    @GetMapping("/product/view/{id}")
+    public String getProduct(@PathVariable("id") String id,Model model){
+
+        Product product = productService.getSingleProduct(id);
+        System.out.println("view product"+product);
+        model.addAttribute("product",product);
+        return "product/view-product";
+    }
 
 
 }

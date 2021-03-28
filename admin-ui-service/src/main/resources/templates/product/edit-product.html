@@ -27,12 +27,11 @@
                     <div class="form-group">
                         <label for="category">Current Category</label>
 
-<!--                        <input type="text" th:field="*{categoryTitle}">-->
 
-                        <select class="form-control" id="category"  th:field="*{categoryTitle}" name="category">
+                        <select class="form-control" id="category"  th:field="*{category.categoryTitle}" name="category">
 
 
-                            <option  th:value="*{categoryTitle}" th:text="*{categoryTitle}" />
+                            <option  th:value="*{category.getCategoryTitle()}" th:text="*{category.getCategoryTitle()}" />
 <!--                            <option th:each="category : ${categories}" -->
 <!--                                    th:value="${category.categoryTitle}" -->
 <!--                                    th:text="${category.categoryTitle}"/>-->
