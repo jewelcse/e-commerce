@@ -28,6 +28,10 @@
                     </thead>
                     <tbody>
 
+                    <tr th:if="${categories.empty}">
+                        <td colspan="5" class="text-center bg-danger text-white"> No Categories Available Or Service is down </td>
+                    </tr>
+
                     <tr th:each="category: ${categories}">
                         <td scope="row">1</td>
                         <td th:text="${category.categoryTitle}" />

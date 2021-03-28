@@ -2,6 +2,7 @@ package com.adminuiservice.controller;
 
 import com.adminuiservice.dto.GrandParentCategory;
 import com.adminuiservice.service.GrandParentCategoryServiceImp;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,15 +29,19 @@ public class GrandParentCategoryController {
     }
 
 
+
     @PostMapping("/save/grand-parent-category")
     public RedirectView saveCategory(@ModelAttribute("grandParentCategory")
                                                          GrandParentCategory grandParentCategory){
 
-       ResponseEntity<GrandParentCategory> response = grandParentService.save(grandParentCategory);
+       GrandParentCategory response = grandParentService.save(grandParentCategory);
 
         System.out.println("Saving grand category => "+response);
 
         return new RedirectView("/categories");
     }
+
+
+
 
 }

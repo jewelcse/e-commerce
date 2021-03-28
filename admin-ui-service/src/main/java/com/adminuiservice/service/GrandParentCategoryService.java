@@ -5,6 +5,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface GrandParentCategoryService {
 
-    ResponseEntity<GrandParentCategory> save(GrandParentCategory grandParentCategory);
+    GrandParentCategory save(GrandParentCategory grandParentCategory);
 
 }

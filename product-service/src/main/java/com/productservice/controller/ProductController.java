@@ -22,7 +22,7 @@ public class ProductController {
     /*
     Admin Endpoint for add product
      */
-    @RabbitListener(queues = ProductConfig.PRODUCT_QUEUE)
+    //@RabbitListener(queues = ProductConfig.PRODUCT_QUEUE)
     @PostMapping("/product/create")
     public Product createProduct(@RequestBody Product product){
         System.out.println(product+" Product service");

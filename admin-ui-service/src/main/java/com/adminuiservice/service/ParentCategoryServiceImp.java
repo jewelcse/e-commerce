@@ -4,6 +4,7 @@ package com.adminuiservice.service;
 import com.adminuiservice.common.RequestURLS;
 import com.adminuiservice.dto.GrandParentCategory;
 import com.adminuiservice.dto.ParentCategory;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,7 @@ public class ParentCategoryServiceImp implements ParentCategoryService{
     }
 
     @Override
+    @HystrixCommand(fallbackMethod = "fetchFallbackAllGrandParentCategories")
     public List<GrandParentCategory> fetchAllGrandParentCategories(){
 
         ResponseEntity<GrandParentCategory[]> responseEntity
@@ -64,6 +66,11 @@ public class ParentCategoryServiceImp implements ParentCategoryService{
 
         List<GrandParentCategory> grandParentCategories = Arrays.asList(responseEntity.getBody());
 
+        return grandParentCategories;
+    }
+
+    private List<GrandParentCategory> fetchFallbackAllGrandParentCategories(){
+        List<GrandParentCategory> grandParentCategories = new ArrayList<>();
         return grandParentCategories;
     }
 }

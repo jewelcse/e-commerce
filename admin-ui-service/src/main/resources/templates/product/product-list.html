@@ -26,14 +26,8 @@
                     </thead>
                     <tbody>
 
-<!--                    <div th:if="${#lists.isEmpty(products)}">-->
-<!--                        <tr >-->
-<!--                            <td colspan="5" class="text-center bg-danger text-white">Not Available any product</td>-->
-<!--                        </tr>-->
-<!--                    </div>-->
-
                     <tr th:if="${products.empty}">
-                        <td colspan="5" class="text-center bg-danger text-white"> No products Available </td>
+                        <td colspan="5" class="text-center bg-danger text-white"> No products Available Or Service is down </td>
                     </tr>
 
                         <tr th:each="product: ${products}" class="bg-secondary text-white">

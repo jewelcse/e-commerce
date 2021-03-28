@@ -31,6 +31,11 @@
                                 name="parentCategoryTitle"
                                 th:field="*{parentCategoryId}">
 
+                             <span th:if="${parentCategories.empty}">
+                                <option class="text-center bg-danger text-white" th:value="0">Service is Down</option>
+                            </span>
+
+
                             <option th:each="pc : ${parentCategories}" th:value="${pc.id}" th:text="${pc.parentCategoryTitle}"/>
 
                         </select>

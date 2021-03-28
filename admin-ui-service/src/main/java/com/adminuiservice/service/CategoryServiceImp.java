@@ -37,6 +37,7 @@ public class CategoryServiceImp  implements CategoryService{
         return categories;
     }
 
+    @HystrixCommand(fallbackMethod = "fetchFallbackAllParentCategories")
     public List<ParentCategory> fetchAllParentCategories() {
 
         ResponseEntity<ParentCategory[]> responseEntity
@@ -45,6 +46,11 @@ public class CategoryServiceImp  implements CategoryService{
         List<ParentCategory> parentCategories
                 = Arrays.asList(responseEntity.getBody());
 
+        return parentCategories;
+    }
+
+    private List<ParentCategory> fetchFallbackAllParentCategories(){
+        List<ParentCategory> parentCategories = new ArrayList<>();
         return parentCategories;
     }
 

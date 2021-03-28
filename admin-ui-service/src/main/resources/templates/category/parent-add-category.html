@@ -25,12 +25,20 @@
                     </div>
                     <div class="form-group">
                         <label for="GrandParentCategoryTitle">Grand Parent Category</label>
+
+
                         <select class="form-control"
                                 id="GrandParentCategoryTitle"
                                 name="grandParentCategory"
                                 th:field="*{grandParentCategoryId}">
 
-                            <option th:each="gc : ${grandParentCategories}" th:value="${gc.id}" th:text="${gc.grandParentCategoryTitle}"/>
+                            <span th:if="${grandParentCategories.empty}">
+                                <option class="text-center bg-danger text-white" th:value="0">Service is Down</option>
+                            </span>
+
+                            <option th:each="gc : ${grandParentCategories}"
+                                    th:value="${gc.id}"
+                                    th:text="${gc.grandParentCategoryTitle}"/>
 
                         </select>
                     </div>

@@ -3,6 +3,7 @@ package com.adminuiservice.service;
 
 import com.adminuiservice.common.RequestURLS;
 import com.adminuiservice.dto.GrandParentCategory;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,9 @@ public class GrandParentCategoryServiceImp implements GrandParentCategoryService
     @Autowired
     private RestTemplate template;
 
+    @HystrixCommand(fallbackMethod = "saveFallbackForGrandParentCategory")
     @Override
-    public ResponseEntity<GrandParentCategory> save(GrandParentCategory grandParentCategory) {
+    public GrandParentCategory save(GrandParentCategory grandParentCategory) {
 
         try{
             // set headers
@@ -34,8 +36,9 @@ public class GrandParentCategoryServiceImp implements GrandParentCategoryService
 
             HttpStatus status = responseEntity.getStatusCode();
 
+            System.out.println("body"+responseEntity.getBody());
             if (status == HttpStatus.OK) {
-                return responseEntity;
+                return responseEntity.getBody();
             }
 
         }catch (HttpStatusCodeException e){
@@ -46,5 +49,10 @@ public class GrandParentCategoryServiceImp implements GrandParentCategoryService
         }
         return null;
 
+    }
+
+    private GrandParentCategory saveFallbackForGrandParentCategory(){
+
+        return new GrandParentCategory(-1L,"Service is Down");
     }
 }
