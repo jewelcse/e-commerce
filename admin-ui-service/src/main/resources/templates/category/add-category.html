@@ -11,6 +11,8 @@
         <div class="card">
             <div class="card-header">
                 Add Category
+                <a class="float-right btn btn-primary"  th:href="@{/categories}">Back</a>
+
             </div>
             <div class="card-body">
                 <form  method="POST" th:action="@{/save/category}" th:object="${category}">

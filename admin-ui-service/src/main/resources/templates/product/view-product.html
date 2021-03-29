@@ -10,7 +10,8 @@
 
         <div class="card">
             <div class="card-header bg-gradient-light" >
-                Title <h3 th:text="${product.productTitle}" ></h3>
+                Title <br><h3 th:text="${product.productTitle}" class="float-left" ></h3>
+                <a class="float-right btn btn-primary"  th:href="@{/admin/products}">Back</a>
             </div>
             <div class="card-body">
                 Category
@@ -24,7 +25,7 @@
                 Price (৳)
                 <h5 th:text="${product.productPrice}"></h5>
                 Image
-                <img src="@{/static/img/avatars/product.png" alt="product Img">
+                <img src="@{/static/img/avatars/product.png}" alt="product Img">
 
                 Description
                 <p th:text="${product.productDescription}"></p>

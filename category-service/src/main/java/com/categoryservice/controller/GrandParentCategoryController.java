@@ -46,4 +46,19 @@ public class GrandParentCategoryController {
         return  response;
 
     }
+
+    @PostMapping("/update/grand-parent-category")
+    public Map<String,Boolean> updateGrandParentCategory(@RequestBody GrandParentCategory grandParentCategory,
+                                                         @RequestParam() Long id){
+
+        grandParentCategory.setId(id);
+        grandParentCategoryService.saveGrandParentCategory(grandParentCategory);
+
+        Map<String,Boolean> response = new HashMap<>();
+        response.put("status",true);
+        return  response;
+
+    }
+
+
 }

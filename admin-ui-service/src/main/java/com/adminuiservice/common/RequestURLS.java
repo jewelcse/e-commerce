@@ -12,11 +12,16 @@ public interface RequestURLS {
     String FETCH_GRAND_PARENT_CATEGORIES_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/get/grand-parent-categories";
     String FETCH_PARENT_CATEGORIES_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/get/parent-categories";
     String FETCH_CATEGORIES_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/get/categories";
+
     String FETCH_CATEGORY_BY_TITLE_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/get/categoryByTitle?categoryTitle=";
+    String FETCH_GRAND_PARENT_CATEGORY_BY_ID = BASE_URL_FOR_CATEGORY_SERVICE+"/get/grand-parent-category?id=";
+
     String CATEGORY_REMOVE_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/delete/category?id=";
+    String GRAND_PARENT_CATEGORY_REMOVE_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/delete/grand-parent-category?id=";
 
     String FETCH_PRODUCTS_URL = BASE_URL_FOR_PRODUCT_SERVICE+"/api/get/products";
     String FETCH_SINGLE_PRODUCT_URL = BASE_URL_FOR_PRODUCT_SERVICE+"/api/get/product?productId=";
+
     String PRODUCT_STORE_URL = BASE_URL_FOR_PRODUCT_SERVICE+"/api/product/create";
     String PRODUCT_REMOVE_URL = BASE_URL_FOR_PRODUCT_SERVICE+"/api/remove/product?id=";
     String PRODUCT_UPDATE_URL = BASE_URL_FOR_PRODUCT_SERVICE+"/api/update/product/{id}";

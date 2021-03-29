@@ -19,9 +19,6 @@ public class GrandParentCategoryService {
         grandParentCategoryRepository.save(gpc);
     }
 
-//    public List<GrandParentCategory> fetchAllGrandParentCategory() {
-//        return grandParentCategoryRepository.findAll();
-//    }
 
     public List<GrandParentCategory> fetchAllGrandParentCategory() {
         return grandParentCategoryRepository.findAll();
@@ -34,4 +31,6 @@ public class GrandParentCategoryService {
     public void remove(GrandParentCategory gp) {
          grandParentCategoryRepository.delete(gp);
     }
+
+
 }

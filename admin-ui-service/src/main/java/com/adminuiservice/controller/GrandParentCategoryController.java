@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -24,7 +23,10 @@ public class GrandParentCategoryController {
 
     @GetMapping("/grand-parent-category/add")
     public String __addCategory(Model model){
+        List<GrandParentCategory> grandParentCategories = grandParentService.getAllGrandParentCategories();
+        model.addAttribute("grandParentCategories",grandParentCategories);
         model.addAttribute("grandParentCategory", new GrandParentCategory());
+        model.addAttribute("add-btn","Add New Category");
         return "category/grand-parent-add-category";
     }
 
@@ -33,12 +35,35 @@ public class GrandParentCategoryController {
     @PostMapping("/save/grand-parent-category")
     public RedirectView saveCategory(@ModelAttribute("grandParentCategory")
                                                          GrandParentCategory grandParentCategory){
+        GrandParentCategory response = grandParentService.save(grandParentCategory);
+        System.out.println("Saving/updating grand category => "+response);
 
-       GrandParentCategory response = grandParentService.save(grandParentCategory);
+        return new RedirectView("/grand-parent-category/add");
+    }
 
-        System.out.println("Saving grand category => "+response);
+    @GetMapping("/grand-parent-category/remove/{id}")
+    public RedirectView removeCategory(@PathVariable("id") Long id){
 
-        return new RedirectView("/categories");
+        //System.out.println("ggggggggID "+id);
+        grandParentService.removeGrandParentCategory(id);
+
+        return new RedirectView("/grand-parent-category/add");
+    }
+
+    @GetMapping("/grand-parent-category/edit/{id}")
+    public String editCategory(@PathVariable("id") Long id,Model model){
+
+        GrandParentCategory grandParentCategory = grandParentService.getGrandParentCategoryById(id);
+
+        List<GrandParentCategory> grandParentCategories = grandParentService.getAllGrandParentCategories();
+
+
+        model.addAttribute("grandParentCategories",grandParentCategories);
+
+        model.addAttribute("grandParentCategory",grandParentCategory);
+        model.addAttribute("update-btn","Update");
+
+        return "category/grand-parent-add-category";
     }
 
 
