@@ -15,4 +15,8 @@ public interface CategoryService {
     ResponseEntity<Category> save(Category category);
 
     void removeCategory(int id);
+
+    Category getCategoryById(Long id);
+
+    ResponseEntity<Category> update(Category category);
 }

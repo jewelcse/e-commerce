@@ -14,7 +14,12 @@ public interface RequestURLS {
     String FETCH_CATEGORIES_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/get/categories";
 
     String FETCH_CATEGORY_BY_TITLE_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/get/categoryByTitle?categoryTitle=";
+    String FETCH_CATEGORY_BY_ID = BASE_URL_FOR_CATEGORY_SERVICE+"/get/category?id=";
     String FETCH_GRAND_PARENT_CATEGORY_BY_ID = BASE_URL_FOR_CATEGORY_SERVICE+"/get/grand-parent-category?id=";
+    String FETCH_PARENT_CATEGORY_BY_ID = BASE_URL_FOR_CATEGORY_SERVICE+"/get/parent-category?id=";
+
+    String UPDATE_PARENT_CATEGORY = BASE_URL_FOR_CATEGORY_SERVICE+"/update/parent-category?id=";
+    String UPDATE_CATEGORY = BASE_URL_FOR_CATEGORY_SERVICE+"/update/category?id=";
 
     String CATEGORY_REMOVE_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/delete/category?id=";
     String GRAND_PARENT_CATEGORY_REMOVE_URL = BASE_URL_FOR_CATEGORY_SERVICE+"/delete/grand-parent-category?id=";

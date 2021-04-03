@@ -117,5 +117,48 @@ public class CategoryServiceImp  implements CategoryService{
 
     }
 
+    @Override
+    public Category getCategoryById(Long id) {
+
+        ResponseEntity<Category> responseEntity =
+                template.getForEntity(RequestURLS.FETCH_CATEGORY_BY_ID+id,Category.class);
+
+        Category category = responseEntity.getBody();
+
+        return category;
+    }
+
+    @Override
+    public ResponseEntity<Category> update(Category category) {
+
+       try{
+           // set headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // set request
+        HttpEntity<Category> request
+                = new HttpEntity<>(category, headers);
+
+
+        // post request
+        ResponseEntity<Category> responseEntity
+                = template.postForEntity(RequestURLS.UPDATE_CATEGORY+category.getId(), request, Category.class);
+
+        HttpStatus status = responseEntity.getStatusCode();
+
+        if (status == HttpStatus.OK) {
+            return responseEntity;
+        }
+
+    }catch (HttpStatusCodeException e){
+        if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+            return null;
+        }
+        throw e;
+    }
+        return null;
+    }
+
 
 }

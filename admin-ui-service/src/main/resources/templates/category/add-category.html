@@ -8,45 +8,88 @@
 <div layout:fragment="content">
 
     <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Add Category
-                <a class="float-right btn btn-primary"  th:href="@{/categories}">Back</a>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        Add Category
+                        <a class="float-right btn btn-primary"  th:href="@{/categories}">Back</a>
 
-            </div>
-            <div class="card-body">
-                <form  method="POST" th:action="@{/save/category}" th:object="${category}">
-                    <div class="form-group">
-                        <label for="categoryTitle">Category Title</label>
-                        <input type="text"
-                               class="form-control"
-                               id="categoryTitle"
-                               name="categoryTitle"
-                               th:field="*{categoryTitle}"
-                               placeholder="category Title goes here..">
                     </div>
+                    <div class="card-body">
+                        <form  method="POST" th:action="@{/save/category}" th:object="${category}">
+                            <div class="form-group">
+                                <label for="categoryTitle">Category Title</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="categoryTitle"
+                                       name="categoryTitle"
+                                       th:field="*{categoryTitle}"
+                                       placeholder="category Title goes here..">
+                            </div>
 
-                    <div class="form-group">
-                        <label for="ParentCategoryTitle">Parent Category</label>
-                        <select class="form-control"
-                                id="ParentCategoryTitle"
-                                name="parentCategoryTitle"
-                                th:field="*{parentCategoryId}">
+                            <div class="form-group">
+                                <label for="ParentCategoryTitle">Parent Category</label>
+                                <select class="form-control"
+                                        id="ParentCategoryTitle"
+                                        name="parentCategoryTitle"
+                                        th:field="*{parentCategoryId}">
 
                              <span th:if="${parentCategories.empty}">
-                                <option class="text-center bg-danger text-white" th:value="0">Service is Down</option>
+                                <option class="text-center bg-danger text-white"
+                                        th:value="0">Service is Down</option>
                             </span>
 
 
-                            <option th:each="pc : ${parentCategories}" th:value="${pc.id}" th:text="${pc.parentCategoryTitle}"/>
+                                    <option th:each="pc : ${parentCategories}"
+                                            th:value="${pc.id}"
+                                            th:text="${pc.parentCategoryTitle}"/>
 
-                        </select>
+                                </select>
+                            </div>
+
+                            <input type="hidden"th:field="*{id}" name="id" id="id" >
+                            <input type="submit" class="btn btn-primary" value="Add Category">
+                        </form>
                     </div>
+                </div>
 
-                    <input type="submit" class="btn btn-primary" value="Add Category">
-                </form>
+            </div>
+            <div class="col-md-7">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Category Title</th>
+                        <th scope="col">Parent Category Title</th>
+                        <th scope="col" colspan="2">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:if="${categories.empty}">
+                        <td colspan="5" class="text-center bg-danger text-white"> No Categories Available Or Service is down </td>
+                    </tr>
+
+                    <tr th:each="category: ${categories}">
+                        <td scope="row">1</td>
+                        <td th:text="${category.categoryTitle}" />
+                        <td th:text="${category.parentCategory.parentCategoryTitle}" />
+                        <td>
+                            <a th:href="@{/category/edit/{id}(id=${category.id})}"
+                               class="btn btn-danger">
+                                <i class="fas fa-edit"></i>
+                            </a>
+
+
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
             </div>
         </div>
+
     </div>
 
 </div>

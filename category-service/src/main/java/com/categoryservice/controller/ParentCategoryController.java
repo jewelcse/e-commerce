@@ -1,8 +1,10 @@
 package com.categoryservice.controller;
 
 
+import com.categoryservice.entity.GrandParentCategory;
 import com.categoryservice.entity.ParentCategory;
 import com.categoryservice.request.ParentCategoryDto;
+import com.categoryservice.service.GrandParentCategoryService;
 import com.categoryservice.service.ParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +17,13 @@ public class ParentCategoryController {
     @Autowired
     private ParentCategoryService parentCategoryService;
 
+    @Autowired
+    private GrandParentCategoryService grandParentCategoryService;
 
     @PostMapping("/parent-category/create")
     public ParentCategoryDto createCategory(@RequestBody ParentCategoryDto parentCategoryDto){
-
-        System.out.println(parentCategoryDto);
         parentCategoryService.saveParentCategory(parentCategoryDto);
+        System.out.println(parentCategoryDto);
         return parentCategoryDto;
     }
 
@@ -42,6 +45,31 @@ public class ParentCategoryController {
 
         parentCategoryService.remove(pc);
 
+        Map<String,Boolean> response = new HashMap<>();
+        response.put("status",true);
+        return  response;
+
+    }
+
+    @PostMapping("/update/parent-category")
+    public Map<String,Boolean> updateParentCategory(@RequestBody ParentCategoryDto parentCategoryDto,
+                                                         @RequestParam() Long id){
+
+
+        ParentCategory parentCategory = new ParentCategory();
+        parentCategory.setId(parentCategoryDto.getId());
+        parentCategory.setParentCategoryTitle(parentCategoryDto.getParentCategoryTitle());
+
+
+        GrandParentCategory grandParentCategory
+                = grandParentCategoryService.fetchSingleGrandParentCategory(parentCategoryDto.getGrandParentCategoryId())
+                .orElseThrow(() ->new ResourceNotFoundException("Parent Category Not found by id "+id));
+
+
+        parentCategory.setGrandParentCategory(grandParentCategory);
+
+        System.out.println(parentCategoryDto);
+        parentCategoryService.updateParentCategory(parentCategory);
         Map<String,Boolean> response = new HashMap<>();
         response.put("status",true);
         return  response;

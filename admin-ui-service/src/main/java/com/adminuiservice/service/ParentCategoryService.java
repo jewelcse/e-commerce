@@ -10,4 +10,10 @@ public interface ParentCategoryService {
 
     ResponseEntity<ParentCategory> save(ParentCategory parentCategory);
     List<GrandParentCategory> fetchAllGrandParentCategories();
+
+    List<ParentCategory> fetchAllParentCategories();
+
+    ParentCategory getParentCategoryById(Long id);
+
+    ResponseEntity<ParentCategory> update(ParentCategory parentCategory);
 }

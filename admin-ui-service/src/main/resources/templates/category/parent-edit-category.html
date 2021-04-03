@@ -9,16 +9,16 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Add Parent Category Title
+                        Edit Parent Category Title
 
-                        <a class="float-right btn btn-primary"  th:href="@{/categories}">Back</a>
+                        <a class="float-right btn btn-primary"  th:href="@{/parent-category/add}">Back</a>
 
                     </div>
                     <div class="card-body">
-                        <form  method="POST" th:action="@{/save/parent-category}" th:object="${parentCategory}">
+                        <form  method="POST" th:action="@{/update/parent-category}" th:object="${parentCategory}">
                             <div class="form-group">
                                 <label for="ParentCategoryTitle">Parent Category Title</label>
                                 <input type="text"
@@ -36,9 +36,13 @@
                                             id="grandParentCategoryId"
                                             name="grandParentCategoryId"
                                             th:field="*{grandParentCategoryId}">
+
                                         <tr th:if="${grandParentCategories.empty}">
                                             <td colspan="5" class="text-center bg-danger text-white"> No Categories Available Or Service is down </td>
                                         </tr>
+                                        <option th:text="${parentCategory.grandParentCategory.grandParentCategoryTitle}"
+                                                th:value="${parentCategory.grandParentCategory.id}" selected></option>
+
                                         <option th:each="gc : ${grandParentCategories}"
                                                 th:value="${gc.id}"
                                                 th:text="${gc.grandParentCategoryTitle}"/>
@@ -46,44 +50,13 @@
                                     </select>
                                 </div>
 
-
-                            <input type="submit" class="btn btn-primary" value="Add Category">
+                            <input type="hidden"  th:field="*{id}" name="id" id="id">
+                            <input type="submit" class="btn btn-primary" value="update Category">
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
 
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Category Title</th>
-                        <th scope="col">Grand Parent Category Title</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr th:if="${parentCategories.empty}">
-                        <td colspan="5" class="text-center bg-danger text-white"> No Categories Available Or Service is down </td>
-                    </tr>
-
-                    <tr th:each="category: ${parentCategories}">
-                        <td scope="row">1</td>
-                        <td th:text="${category.parentCategoryTitle}" />
-                        <td th:text="${category.grandParentCategory.grandParentCategoryTitle}" />
-                        <td>
-                            <a th:href="@{/parent-category/edit/{id}(id=${category.id})}"
-                               class="btn btn-danger">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
         </div>
 
     </div>

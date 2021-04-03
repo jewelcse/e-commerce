@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<body>
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Edit Category
+                        <a class="float-right btn btn-primary"  th:href="@{/categories}">Back</a>
+
+                    </div>
+                    <div class="card-body">
+                        <form  method="POST" th:action="@{/update/category}" th:object="${category}">
+                            <div class="form-group">
+                                <label for="categoryTitle">Category Title</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="categoryTitle"
+                                       name="categoryTitle"
+                                       th:field="*{categoryTitle}"
+                                       placeholder="category Title goes here..">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="parentCategoryId">Parent Category</label>
+                                <select class="form-control"
+                                        id="parentCategoryId"
+                                        name="parentCategoryId"
+                                        th:field="*{parentCategoryId}">
+
+
+                                    <option th:value="${category.parentCategory.id}"
+                                            th:text="${category.parentCategory.parentCategoryTitle}"
+                                    selected/>
+
+                                    <option th:each="pc : ${parentCategories}"
+                                            th:value="${pc.id}"
+                                            th:text="${pc.parentCategoryTitle}"/>
+
+                                </select>
+                            </div>
+
+                            <input type="hidden"th:field="*{id}" name="id" id="id" >
+                            <input type="submit" class="btn btn-primary" value="Add Category">
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

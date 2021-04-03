@@ -23,6 +23,7 @@ public class ParentCategoryService {
 
         ParentCategory parentCategory = new ParentCategory();
         parentCategory.setParentCategoryTitle(pcd.getParentCategoryTitle());
+
         GrandParentCategory gpc = new GrandParentCategory();
         gpc.setId(pcd.getGrandParentCategoryId());
         parentCategory.setGrandParentCategory(gpc);
@@ -41,5 +42,11 @@ public class ParentCategoryService {
 
     public void remove(ParentCategory pc) {
         parentCategoryRepository.delete(pc);
+    }
+
+    public void updateParentCategory(ParentCategory parentCategory) {
+
+        parentCategoryRepository.save(parentCategory);
+        System.out.println(" service "+ parentCategory);
     }
 }

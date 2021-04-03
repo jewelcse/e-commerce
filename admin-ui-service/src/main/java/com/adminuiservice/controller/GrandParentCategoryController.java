@@ -41,14 +41,14 @@ public class GrandParentCategoryController {
         return new RedirectView("/grand-parent-category/add");
     }
 
-    @GetMapping("/grand-parent-category/remove/{id}")
-    public RedirectView removeCategory(@PathVariable("id") Long id){
-
-        //System.out.println("ggggggggID "+id);
-        grandParentService.removeGrandParentCategory(id);
-
-        return new RedirectView("/grand-parent-category/add");
-    }
+//    @GetMapping("/grand-parent-category/remove/{id}")
+//    public RedirectView removeCategory(@PathVariable("id") Long id){
+//
+//        //System.out.println("ggggggggID "+id);
+//        grandParentService.removeGrandParentCategory(id);
+//
+//        return new RedirectView("/grand-parent-category/add");
+//    }
 
     @GetMapping("/grand-parent-category/edit/{id}")
     public String editCategory(@PathVariable("id") Long id,Model model){
