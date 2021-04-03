@@ -44,4 +44,9 @@ public class CategoryService {
     public Optional<Category> fetchCategoryByTitle(String categoryTitle) {
         return categoryRepository.findByCategoryTitle(categoryTitle);
     }
+
+    public void updateCategory(Category category) {
+        categoryRepository.save(category);
+
+    }
 }

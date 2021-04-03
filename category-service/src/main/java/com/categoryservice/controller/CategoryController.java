@@ -5,6 +5,7 @@ import com.categoryservice.entity.Category;
 import com.categoryservice.entity.GrandParentCategory;
 import com.categoryservice.entity.ParentCategory;
 import com.categoryservice.request.CategoryDto;
+import com.categoryservice.request.ParentCategoryDto;
 import com.categoryservice.service.CategoryService;
 import com.categoryservice.service.ParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,31 @@ public class CategoryController {
 
         categoryService.remove(c);
 
+        Map<String,Boolean> response = new HashMap<>();
+        response.put("status",true);
+        return  response;
+
+    }
+
+    @PostMapping("/update/category")
+    public Map<String,Boolean> updateCategory(@RequestBody CategoryDto categoryDto,
+                                                    @RequestParam() Long id){
+
+
+        Category category = new Category();
+        category.setId(categoryDto.getId());
+        category.setCategoryTitle(categoryDto.getCategoryTitle());
+
+
+        ParentCategory parentCategory
+                = parentCategoryService.fetchSingleParentCategory(categoryDto.getParentCategoryId())
+                .orElseThrow(() ->new ResourceNotFoundException("Category Not found by id "+id));
+
+
+        category.setParentCategory(parentCategory);
+
+        System.out.println(categoryDto);
+        categoryService.updateCategory(category);
         Map<String,Boolean> response = new HashMap<>();
         response.put("status",true);
         return  response;
