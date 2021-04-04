@@ -11,10 +11,14 @@
         <div class="card">
             <div class="card-header">
                 Category List
+                <span th:if="${categories.empty}">
+                   <a class="float-right btn btn-danger text-white" >Service is down </a>
+                </span>
+                <span th:if="!${categories.empty}">
                 <a class="float-right btn btn-primary"  th:href="@{/category/add}">Add Category</a>
                 <a class="float-right btn btn-primary mr-1"  th:href="@{/parent-category/add}">Add _Category</a>
                 <a class="float-right btn btn-primary  mr-1"  th:href="@{/grand-parent-category/add}">Add __Category</a>
-
+                </span>
             </div>
             <div class="card-body">
                 <table class="table table-hover">
@@ -24,7 +28,7 @@
                         <th scope="col">Category</th>
                         <th scope="col">_Category</th>
                         <th scope="col">__Category</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" colspan="2" class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +42,13 @@
                         <td th:text="${category.categoryTitle}" />
                         <td th:text="${category.parentCategory.parentCategoryTitle}" />
                        <td th:text="${category.parentCategory.grandParentCategory.grandParentCategoryTitle}" />
+
+                        <td>
+                            <a th:href="@{/category/edit/{id}(id=${category.id})}"
+                               class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
 
                         <td>
                             <a th:href="@{/category/remove/{id}(id=${category.id})}"

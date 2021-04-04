@@ -75,13 +75,12 @@
                         <td scope="row">1</td>
                         <td th:text="${category.categoryTitle}" />
                         <td th:text="${category.parentCategory.parentCategoryTitle}" />
+
                         <td>
                             <a th:href="@{/category/edit/{id}(id=${category.id})}"
-                               class="btn btn-danger">
+                               class="btn btn-primary">
                                 <i class="fas fa-edit"></i>
                             </a>
-
-
                         </td>
                     </tr>
 
