@@ -11,10 +11,11 @@
         <div class="card">
             <div class="card-header">
                 Category List
-                <span th:if="${categories.empty}">
-                   <a class="float-right btn btn-danger text-white" >Service is down </a>
-                </span>
-                <span th:if="!${categories.empty}">
+<!--                <span th:if="${categories.empty}">-->
+<!--                   <a class="float-right btn btn-danger text-white" >Service is down </a>-->
+<!--                </span>-->
+<!--                th:if="!${categories.empty}"-->
+                <span>
                 <a class="float-right btn btn-primary"  th:href="@{/category/add}">Add Category</a>
                 <a class="float-right btn btn-primary mr-1"  th:href="@{/parent-category/add}">Add _Category</a>
                 <a class="float-right btn btn-primary  mr-1"  th:href="@{/grand-parent-category/add}">Add __Category</a>
@@ -34,7 +35,7 @@
                     <tbody>
 
                     <tr th:if="${categories.empty}">
-                        <td colspan="5" class="text-center bg-danger text-white"> No Categories Available Or Service is down </td>
+                        <td colspan="5" class="text-center bg-danger text-white"> No Categories Available </td>
                     </tr>
 
                     <tr th:each="category: ${categories}">

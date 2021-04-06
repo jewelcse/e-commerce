@@ -28,7 +28,6 @@ public class AdminController {
 
         List<Category> categories = categoryService.getCategories();
         model.addAttribute("categories",categories);
-        System.out.println(categories);
         return "category/category-list";
     }
 

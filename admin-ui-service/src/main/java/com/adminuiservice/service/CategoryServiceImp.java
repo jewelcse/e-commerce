@@ -56,6 +56,18 @@ public class CategoryServiceImp  implements CategoryService{
     @Override
     public List<Category> getFallBackCategories(){
         List<Category> categories = new ArrayList<>();
+        Category category = new Category();
+        ParentCategory parentCategory = new ParentCategory();
+        parentCategory.setParentCategoryTitle("Service is down");
+
+        GrandParentCategory grandParentCategory = new GrandParentCategory();
+        grandParentCategory.setGrandParentCategoryTitle("Service is down");
+
+        parentCategory.setGrandParentCategory(grandParentCategory);
+
+        category.setCategoryTitle("Service is Down");
+        category.setParentCategory(parentCategory);
+        categories.add(category);
         return categories;
     }
 
