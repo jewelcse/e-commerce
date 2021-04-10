@@ -2,21 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c505507-5ef2-4298-9cbe-edf5bd6dc4cf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/java/com/adminuiservice/common/RequestURLS.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/java/com/adminuiservice/common/RequestURLS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/java/com/adminuiservice/controller/GrandParentCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/java/com/adminuiservice/controller/GrandParentCategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/java/com/adminuiservice/service/GrandParentCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/java/com/adminuiservice/service/GrandParentCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/java/com/adminuiservice/service/GrandParentCategoryServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/java/com/adminuiservice/service/GrandParentCategoryServiceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/category/add-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/category/add-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/category/grand-parent-add-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/category/grand-parent-add-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/category/parent-add-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/category/parent-add-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/product/add-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/product/add-product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/product/edit-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/product/edit-product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/product/view-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin-ui-service/src/main/resources/templates/product/view-product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1qQzhmE50iwTNbTSE1WqeYxvugQ" />
   <component name="ProjectViewState">
@@ -53,7 +47,11 @@
       <option name="presentableId" value="Default" />
       <updated>1617026723079</updated>
       <workItem from="1617026729191" duration="14000" />
+      <workItem from="1618050756610" duration="274000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
 </project>
