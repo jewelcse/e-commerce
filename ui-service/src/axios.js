@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-const instance = axios.create({
+export const product = axios.create({
     baseURL: 'http://localhost:9090/ecom/product-service/api/'
 });
 
-
-export default instance;
+export const grandParentCategory = axios.create({
+    baseURL: 'http://localhost:9090/ecom/category-service/'
+});

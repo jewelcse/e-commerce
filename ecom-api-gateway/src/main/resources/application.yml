@@ -41,6 +41,9 @@ zuul:
     product-service:
       path: /product-service/**
       url: http://localhost:8200
+    category-service:
+      path: /category-service/**
+      url: http://localhost:8100
   prefix: /ecom
 
 

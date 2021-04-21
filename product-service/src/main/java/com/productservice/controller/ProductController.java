@@ -5,6 +5,7 @@ import com.productservice.entity.Product;
 import com.productservice.service.ProductServiceImp;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,10 +47,15 @@ public class ProductController {
     /*
     User and Admin endpoint for get all product list
      */
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/products")
     public ResponseEntity<List<Product>> getAllProduct(){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("ACCESS_CONTROL_ALLOW_ORIGIN","*");
         List<Product> products = productService.getProducts();
-        return new ResponseEntity<>(products, HttpStatus.OK);
+        //return new ResponseEntity<>(products, HttpStatus.OK);
+        return ResponseEntity.ok().header(String.valueOf(headers)).body(products);
     }
 
     @GetMapping("/get/product")

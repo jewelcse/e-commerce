@@ -2,10 +2,12 @@
 import React, { useState, useEffect, useReducer } from 'react'
 
 import { Button } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap'
 
 
-import axios from '../../axios'
+import { product } from '../../axios'
 import Product from '../product/Product'
+import Layout from '../layout/Layout'
 
 
 const initialState = {
@@ -41,7 +43,7 @@ const ProductList = () => {
     useEffect(() => {
 
         async function fetchAllProducts() {
-            axios.get("get/products").then(res => {
+            product.get("get/products").then(res => {
                 //console.log(res.data)
                 dispatch({
                     type: 'FETCH_SUCCESS',
@@ -69,11 +71,12 @@ const ProductList = () => {
     )
 
     return (
-        <div>
-            <h1>All Products <Button>Fetch</Button></h1>
-            {productList}
+        <React.Fragment>
+            <Row>
+                {productList}
+            </Row>
 
-        </div>
+        </React.Fragment>
     );
 
 }
