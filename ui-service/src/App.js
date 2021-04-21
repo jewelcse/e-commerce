@@ -11,6 +11,7 @@ import GrandParentCategory from './components/grandParentCategory/GrandParentCat
 
 
 import ProductList from './components/productList/ProductList'
+import ProductDetails from './components/product/ProductDetails'
 import Navigation from './components/navigation/Navigation'
 import Layout from './components/layout/Layout'
 import Error from './components/error/Error'
@@ -30,7 +31,8 @@ function App() {
             <Route path="/products">
               <ProductList />
             </Route>
-
+            <Route path="/product/:id" children={<ProductDetails />}>
+            </Route>
             <Route path="*">
               <Error />
             </Route>
