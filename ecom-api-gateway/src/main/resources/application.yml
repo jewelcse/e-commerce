@@ -1,43 +1,46 @@
-#
-######## Set up Application Name ########
-#
-#spring:
-#  application:
-#    name: ecom-api-gateway
-#
-#
-######## Set up Application port #########
-#server:
-#  port: 9090
-#
-#
-#
-######### Set up Eureka client ############
-#eureka:
-#  client:
-#    registerWithEureka: true
-#    fetchRegistry: true
-#    serverviceUrl:
-#      defaultZone: http://localhost:8761/eureka/
-#  instance:
-#    hostname: localhost
-#
-#
-######## Set up services ############
-#zuul:
-#  routes:
-#    product-service:
-#      path: /api/**
-#      url: http://localhost:8200
-#
-#
-######## Set up hystrix tracing system ##########
-#
-##management:
-##  endpoints:
-##    web:
-##      exposure:
-##        include: hystrix.stream
-##      base-path: /
-#
-#
+
+####### Set up Application Name ########
+
+spring:
+  application:
+    name: ecom-api-gateway
+
+
+####### Set up Application port #########
+server:
+  port: 9090
+
+
+
+######## Set up Eureka client ############
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serverviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+
+
+
+####### Set up hystrix tracing system ##########
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: hystrix.stream
+#      base-path: /
+
+
+####### Set up services ############
+zuul:
+  routes:
+    product-service:
+      path: /product-service/**
+      url: http://localhost:8200
+  prefix: /ecom
+
+

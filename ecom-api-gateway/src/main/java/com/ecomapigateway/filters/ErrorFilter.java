@@ -2,6 +2,7 @@ package com.ecomapigateway.filters;
 
 import com.netflix.zuul.ZuulFilter;
 
+
 public class ErrorFilter extends ZuulFilter {
 
 	@Override

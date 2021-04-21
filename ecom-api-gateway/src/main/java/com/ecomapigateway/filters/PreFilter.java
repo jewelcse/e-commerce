@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import org.springframework.context.annotation.Configuration;
+
+
 
 public class PreFilter extends ZuulFilter {
 

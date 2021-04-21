@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
-@EnableDiscoveryClient
+@EnableEurekaClient
 @EnableZuulProxy
 public class EcomApiGatewayApplication {
 
