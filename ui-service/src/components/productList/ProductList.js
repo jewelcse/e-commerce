@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { Container, Col, Row } from 'react-bootstrap'
 
 
-import { product } from '../../axios'
+import { productService } from '../../axios'
 import Product from '../product/Product'
 import Layout from '../layout/Layout'
 
@@ -43,7 +43,7 @@ const ProductList = () => {
     useEffect(() => {
 
         async function fetchAllProducts() {
-            product.get("get/products").then(res => {
+            productService.get("get/products").then(res => {
                 //console.log(res.data)
                 dispatch({
                     type: 'FETCH_SUCCESS',

@@ -49,4 +49,8 @@ public class ParentCategoryService {
         parentCategoryRepository.save(parentCategory);
         System.out.println(" service "+ parentCategory);
     }
+
+    public List<ParentCategory> fetchParentCategories(Long id) {
+        return parentCategoryRepository.findParentCategoriesByAndGrandParentCategory_Id(id);
+    }
 }

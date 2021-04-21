@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
 import { categoryService } from '../../axios'
-import Category from './GrandParentCategory'
+import Category from './Category'
 
 
-const GrandParentCategory = () => {
+const CategoryList = () => {
 
-    const [grandParentCategories, setGrandParentCategories] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
 
         async function fetchArticles() {
-            categoryService.get("get/grand-parent-categories").then(res => {
-                setGrandParentCategories(res.data);
-                console.log(grandParentCategories)
+            categoryService.get("get/categories").then(res => {
+                setCategories(res.data);
+                console.log(setCategories)
 
             }).catch(error => {
                 console.log("Something went Wrong! Check your Internet Connection plz");
@@ -27,7 +27,7 @@ const GrandParentCategory = () => {
     }, [])
 
 
-    const lists = grandParentCategories.map((category) => (
+    const lists = categories.map((category) => (
 
         <Category data={category} key={category.id} />
     ));
@@ -43,4 +43,4 @@ const GrandParentCategory = () => {
 }
 
 
-export default GrandParentCategory;
+export default CategoryList;

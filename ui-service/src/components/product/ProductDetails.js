@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { product } from '../../axios'
+import { productService } from '../../axios'
 
 import { Container, Col, Row, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -30,7 +30,7 @@ const ProductDetails = (props) => {
 
         async function fetchProduct() {
 
-            product.get(`get/product?productId=${id}`)
+            productService.get(`get/product?productId=${id}`)
                 .then(res => {
                     console.log(res.data)
                     setProductDetails({
@@ -87,6 +87,7 @@ const ProductDetails = (props) => {
                         {productDetails.productDescription}
                     </p>
                     <h3 className="product-price">Price: &#2547;<span>{productDetails.productPrice}</span></h3>
+
                     <div className="action">
                         <Button className="add-to-cart-btn">Add to Cart</Button>
                         <Button className="like-btn"><FontAwesomeIcon icon={faHeart} /></Button>

@@ -2,6 +2,7 @@ package com.categoryservice.service;
 
 
 import com.categoryservice.entity.GrandParentCategory;
+import com.categoryservice.entity.ParentCategory;
 import com.categoryservice.repository.GrandParentCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,5 @@ public class GrandParentCategoryService {
     public void remove(GrandParentCategory gp) {
          grandParentCategoryRepository.delete(gp);
     }
-
 
 }

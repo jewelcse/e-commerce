@@ -1,9 +1,11 @@
 package com.categoryservice.controller;
 
 
+import com.categoryservice.entity.Category;
 import com.categoryservice.entity.GrandParentCategory;
 import com.categoryservice.entity.ParentCategory;
 import com.categoryservice.request.ParentCategoryDto;
+import com.categoryservice.service.CategoryService;
 import com.categoryservice.service.GrandParentCategoryService;
 import com.categoryservice.service.ParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ import java.util.*;
 
 @RestController
 public class ParentCategoryController {
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private ParentCategoryService parentCategoryService;
@@ -36,6 +41,12 @@ public class ParentCategoryController {
     public Optional<ParentCategory> getSingleParentCategory(@RequestParam("id") Long id){
 
         return parentCategoryService.fetchSingleParentCategory(id);
+    }
+
+    @GetMapping("/get/parent-category/child-category")
+    public List<Category> getParentCategories(@RequestParam("id") Long id){
+
+        return categoryService.fetchParentCategories(id);
     }
 
     @GetMapping("/delete/parent-category")

@@ -2,7 +2,9 @@ package com.categoryservice.controller;
 
 
 import com.categoryservice.entity.GrandParentCategory;
+import com.categoryservice.entity.ParentCategory;
 import com.categoryservice.service.GrandParentCategoryService;
+import com.categoryservice.service.ParentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,9 @@ public class GrandParentCategoryController {
 
     @Autowired
     private GrandParentCategoryService grandParentCategoryService;
+
+    @Autowired
+    private ParentCategoryService parentCategoryService;
 
     @PostMapping("/grand-parent-category/create")
     public GrandParentCategory createCategory(@RequestBody GrandParentCategory grandParentCategory){
@@ -32,6 +37,12 @@ public class GrandParentCategoryController {
     public Optional<GrandParentCategory> getSingleGrandParentCategory(@RequestParam("id") Long id){
 
         return grandParentCategoryService.fetchSingleGrandParentCategory(id);
+    }
+
+    @GetMapping("/get/grand-parent-category/child-category")
+    public List<ParentCategory> getParentCategories(@RequestParam("id") Long id){
+
+        return parentCategoryService.fetchParentCategories(id);
     }
 
     @GetMapping("/delete/grand-parent-category")

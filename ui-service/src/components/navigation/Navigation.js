@@ -4,6 +4,7 @@ import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 
 import './Navigation.css'
 import GrandParentCategoryList from '../grandParentCategory/GrandParentCategoryList'
+import CategoryList from '../category/CategoryList'
 
 
 const Navigation = () => {
@@ -17,6 +18,7 @@ const Navigation = () => {
                         <NavDropdown title="Category" id="collasible-nav-dropdown">
 
                             <GrandParentCategoryList />
+                            {/* <CategoryList /> */}
 
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
