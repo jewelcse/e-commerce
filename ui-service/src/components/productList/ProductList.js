@@ -1,6 +1,9 @@
 
 import React, { useState, useEffect, useReducer } from 'react'
 
+import { Button } from 'react-bootstrap';
+
+
 import axios from '../../axios'
 import Product from '../product/Product'
 
@@ -62,12 +65,12 @@ const ProductList = () => {
         return <h3>Loading.... please wait</h3>
     }
 
-    const productList = state.products.map((product) => <Product data={product} id={product.id} key={product.index} />
+    const productList = state.products.map((product) => <Product data={product} id={product.id} key={product.id} />
     )
 
     return (
         <div>
-            <h1>All Products</h1>
+            <h1>All Products <Button>Fetch</Button></h1>
             {productList}
 
         </div>
