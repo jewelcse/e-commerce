@@ -1,5 +1,27 @@
-   
+   /*
 
+
+   New Added CSS
+
+
+
+   */
+
+
+   .column a{
+       text-decoration: none;
+   }
+
+
+
+
+
+
+
+
+
+
+   /* Old CSS */
         .product {
             border: 1px solid #fff;
             display: inline-block;

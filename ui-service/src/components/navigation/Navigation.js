@@ -7,6 +7,8 @@ import GrandParentCategoryList from '../grandParentCategory/GrandParentCategoryL
 import CategoryList from '../category/CategoryList'
 
 
+import cartImg from '../../img/shopping-cart-solid.svg'
+
 const Navigation = () => {
     return (
         <Navbar collapseOnSelect expand="lg" className="navbar" fixed="top" bg="dark"  >
@@ -24,7 +26,9 @@ const Navigation = () => {
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link as={Link} to="/products">Products</Nav.Link>
-                        <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
+                        <Nav.Link as={Link} to="/cart">
+                            <img src={cartImg} /> <span>5</span> cart
+                        </Nav.Link>
 
                     </Nav>
                     <Nav className="navbar-nav">

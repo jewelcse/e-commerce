@@ -9,6 +9,8 @@ import { productService } from '../../axios'
 import Product from '../product/Product'
 import Layout from '../layout/Layout'
 
+import loader from '../../img/loader.gif'
+
 
 const initialState = {
     products: {},
@@ -64,7 +66,7 @@ const ProductList = () => {
     console.log(state.error)
 
     if (state.isLoading) {
-        return <h3>Loading.... please wait</h3>
+        return <div style={{ width: '100%', height: '100%', textAlign: 'center' }}><img src={loader} /></div>
     }
 
     const productList = state.products.map((product) => <Product data={product} id={product.id} key={product.id} />

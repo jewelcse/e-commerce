@@ -7,7 +7,7 @@ import { Container, Col, Row, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import './ProductDetails.css'
-
+import loader from '../../img/loader.gif'
 const ProductDetails = (props) => {
 
     const [productDetails, setProductDetails] = useState({
@@ -51,7 +51,7 @@ const ProductDetails = (props) => {
     }, []);
 
     if (isLoading) {
-        return (<h2 className="section">Loading... please wait a second!!!</h2>)
+        return <div style={{ width: '100%', height: '100%', textAlign: 'center' }}><img src={loader} /></div>
     }
     return (
         <React.Fragment>

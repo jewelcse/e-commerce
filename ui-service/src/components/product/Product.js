@@ -11,7 +11,30 @@ const Product = (props) => {
     return (
         <React.Fragment>
             <Col xs={12} md={4} xl={3} lg={3} >
-                <div className="product">
+                <div className="four wide column">
+                    <div class="ui link card">
+                        <Link to={`/product/${props.data.id}`} class="image">
+                            <img src="http://placehold.it/600x650" />
+                        </Link>
+                        <div class="content">
+                            <Link to={`/product/${props.data.id}`} class="header">{props.data.productTitle.substring(0, MAX_LENGTH)},...</Link>
+                            <div class="meta">
+                                <p>&#2547;{props.data.productPrice}</p>
+                            </div>
+                            <div class="ui vertical animated button" tabindex="0">
+                                <div class="hidden content">Shop</div>
+                                <div class="visible content">
+                                    <i class="shop icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                {/* <div className="product">
                     <Link to={`/product/${props.data.id}`}>
                         <div className="product-img">
                             <img src="http://placehold.it/600x650" />
@@ -24,7 +47,7 @@ const Product = (props) => {
                             <p className="product-text price">&#2547;{props.data.productPrice}</p>
                         </div>
                     </Link>
-                </div>
+                </div> */}
             </Col>
             {/* <Col xs={12} md={4} xl={4} lg={3} >
                 <div>
