@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 
@@ -6,10 +6,26 @@ import './Navigation.css'
 import GrandParentCategoryList from '../grandParentCategory/GrandParentCategoryList'
 import CategoryList from '../category/CategoryList'
 
+import { connect } from 'react-redux'
+
 
 import cartImg from '../../img/shopping-cart-solid.svg'
 
-const Navigation = () => {
+const Navigation = ({ cart }) => {
+
+    const [cartCount, setCartCount] = useState(0);
+
+    useEffect(() => {
+        let count = 0;
+
+        cart.forEach((item) => {
+            count += item.qty
+        });
+        setCartCount(count)
+
+    }, [cart, cartCount])
+
+
     return (
         <Navbar collapseOnSelect expand="lg" className="navbar" fixed="top" bg="dark"  >
             <Container>
@@ -27,7 +43,7 @@ const Navigation = () => {
                         </NavDropdown>
                         <Nav.Link as={Link} to="/products">Products</Nav.Link>
                         <Nav.Link as={Link} to="/cart">
-                            <img src={cartImg} /> <span>5</span> cart
+                            <img src={cartImg} /> <span>{cartCount}</span> cart
                         </Nav.Link>
 
                     </Nav>
@@ -42,4 +58,10 @@ const Navigation = () => {
     )
 }
 
-export default Navigation
+const mapStateToProps = state => {
+    return {
+        cart: state.shop.cart
+    }
+}
+
+export default connect(mapStateToProps)(Navigation)

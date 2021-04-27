@@ -11,7 +11,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import GrandParentCategory from './components/grandParentCategory/GrandParentCategoryList'
 
 import ProductList from './components/productList/ProductList'
-import ProductListFromRedux from './components/productList/ProductListFromRedux'
+import Cart from './components/cart/Cart'
+import ProductsItemList from './components/productList/ProductsItemList'
 import ProductDetails from './components/product/ProductDetails'
 import Navigation from './components/navigation/Navigation'
 import Layout from './components/layout/Layout'
@@ -30,11 +31,14 @@ function App() {
         <Layout>
           <Switch>
             <Route exact path="/">
-              <ProductListFromRedux />
+              <ProductsItemList />
             </Route>
 
             <Route path="/products">
-              <ProductListFromRedux />
+              <ProductsItemList />
+            </Route>
+            <Route path="/cart">
+              <Cart />
             </Route>
             <Route path="/product/:id" children={<ProductDetails />}>
             </Route>

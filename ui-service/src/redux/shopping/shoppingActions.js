@@ -1,23 +1,37 @@
 
 import * as actionTypes from './shoppingTypes'
 
-const addToCart = id => {
+export const setProducts = products => {
+    return {
+        type: actionTypes.SET_PRODUCTS,
+        payLoad: products
+    }
+}
+
+export const addToCart = id => {
     return {
         type: actionTypes.ADD_TO_CART,
-        payLoad: id
+        payLoad: {
+            id: id
+        }
     }
 }
 
-const removeFromCart = id => {
+export const removeFromCart = id => {
     return {
         type: actionTypes.REMOVE_FROM_CART,
-        payLoad: id
+        payLoad: {
+            id: id
+        }
     }
 }
 
-const adjustQty = (id, value) => {
+export const adjustQty = (id, value) => {
     return {
         type: actionTypes.ADJUST_QTY,
-        payLoad: value
+        payLoad: {
+            id: id,
+            qty: value
+        }
     }
 }
