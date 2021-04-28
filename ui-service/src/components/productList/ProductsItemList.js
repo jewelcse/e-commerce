@@ -13,36 +13,40 @@ import loader from '../../img/loader.gif'
 
 import { useDispatch } from 'react-redux'
 
-import * as productActions from '../../redux/products/productsAction'
 import * as shoppingActions from '../../redux/shopping/shoppingActions'
 
 
 
-const ProductsItemList = ({ loading, products, error }) => {
+const ProductsItemList = ({ products }) => {
 
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     const dispatch = useDispatch();
 
     console.log(products)
     console.log("Before useeffect")
 
-    const fetchAllProducts = async () => {
-        const response = await productService.get("get/products").catch(err => {
-            console.log(err);
-        })
-        dispatch(productActions.productsFetchSuccess(response.data))
-        dispatch(shoppingActions.setProducts(response.data))
 
-        console.log("fetchAllProducts", response.data)
-    }
 
     useEffect(() => {
 
         console.log("Within useeffect")
-        //fetchProducts(); // get data from redux actions
-        fetchAllProducts(); // get data using react axios
 
+        async function fetchAllProducts3rdMethod() {
+            productService.get("get/products").then(res => {
+                setLoading(false)
+                setError('')
+                dispatch(shoppingActions.setProducts(res.data))
+            }).catch(error => {
+                console.log(error);
+                setLoading(true)
+                setError('Check Connection')
+            });
 
+        }
+        fetchAllProducts3rdMethod();
     }, []);
 
 
@@ -73,24 +77,9 @@ const ProductsItemList = ({ loading, products, error }) => {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products.products,
-        loading: state.products.loading,
-        error: state.products.error
+        products: state.shop.products
     }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         fetchProducts: () => {
-//             dispatch(fetchProducts())
-//         }
-//     }
-// }
-
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(ProductListFromRedux);
 
 
 

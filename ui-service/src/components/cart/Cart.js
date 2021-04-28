@@ -4,10 +4,14 @@ import { removeFromCart } from '../../redux/shopping/shoppingActions'
 import './Cart.css'
 import CartItem from './CartItem'
 
+import useLocalStorage from '../../localStorage'
+
 const Cart = ({ cart }) => {
 
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalItem, setTotalItem] = useState(0);
+    const [cartData, setCartData] = useState();
+
 
 
     useEffect(() => {
@@ -21,6 +25,8 @@ const Cart = ({ cart }) => {
 
         setTotalItem(items);
         setTotalPrice(price);
+
+
 
     }, [cart, totalItem, totalPrice, setTotalPrice, setTotalItem])
 

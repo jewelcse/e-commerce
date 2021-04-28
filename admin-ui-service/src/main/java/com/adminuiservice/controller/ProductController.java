@@ -55,6 +55,8 @@ public class ProductController {
     public RedirectView save(@ModelAttribute("product") Product product){
 
 
+        System.out.println("saving.."+product);
+
         Category category = categoryService.getCategoryByTitle(product.getCategory().getCategoryTitle());
 
         product.setCategory(category);
@@ -97,6 +99,10 @@ public class ProductController {
     public RedirectView update(@ModelAttribute("product") Product product){
 
         System.out.println("updating"+product);
+
+        Category category = categoryService.getCategoryByTitle(product.getCategory().getCategoryTitle());
+
+        product.setCategory(category);
 
         productService.updateProduct(product);
         System.out.println("Updating product => ");

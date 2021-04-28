@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { productService } from '../../axios'
+import { connect } from 'react-redux'
+import { addToCart } from '../../redux/shopping/shoppingActions'
 
 import { Container, Col, Row, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import './ProductDetails.css'
 import loader from '../../img/loader.gif'
-const ProductDetails = (props) => {
+import Loader from '../loader/Loader'
+const ProductDetails = ({ item, addToCart }) => {
 
     const [productDetails, setProductDetails] = useState({
         id: "",
@@ -51,17 +54,11 @@ const ProductDetails = (props) => {
     }, []);
 
     if (isLoading) {
-        return <div style={{ width: '100%', height: '100%', textAlign: 'center' }}><img src={loader} /></div>
+        return <Loader />
     }
     return (
         <React.Fragment>
-            {/* <h1>{props.data.productTitle}</h1>
-            <p>{props.data.category.parentCategory.grandParentCategory.grandParentCategoryTitle}
-                ->{props.data.category.parentCategory.parentCategoryTitle}
-                ->{props.data.category.categoryTitle}</p>
-            <p>{props.data.productDescription}</p>
-            <p>{props.data.productPrice}</p>
-            <p>{props.data.productImagePath}</p> */}
+
             <Row>
                 <p>{productDetails.productCategory.parentCategory.grandParentCategory.grandParentCategoryTitle}->
                     {productDetails.productCategory.parentCategory.parentCategoryTitle}
@@ -89,7 +86,7 @@ const ProductDetails = (props) => {
                     <h3 className="product-price">Price: &#2547;<span>{productDetails.productPrice}</span></h3>
 
                     <div className="action">
-                        <Button className="add-to-cart-btn">Add to Cart</Button>
+                        <Button className="add-to-cart-btn" onClick={() => addToCart(productDetails.id)}>Add to Cart</Button>
                         <Button className="like-btn"><FontAwesomeIcon icon={faHeart} /></Button>
                     </div>
                 </Col>
@@ -101,5 +98,12 @@ const ProductDetails = (props) => {
     )
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        addToCart: (id) => dispatch(addToCart(id))
 
-export default ProductDetails
+    }
+}
+
+
+export default connect(null, mapDispatchToProps)(ProductDetails)

@@ -31,11 +31,11 @@ function App() {
         <Layout>
           <Switch>
             <Route exact path="/">
-              <ProductsItemList />
+              <ProductList />
             </Route>
 
             <Route path="/products">
-              <ProductsItemList />
+              <ProductList />
             </Route>
             <Route path="/cart">
               <Cart />

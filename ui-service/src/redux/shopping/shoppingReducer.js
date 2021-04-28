@@ -3,7 +3,8 @@ import * as actionTypes from './shoppingTypes'
 
 const initialState = {
     products: [],
-    cart: []
+    cart: [],
+    wishList: []
 }
 
 
@@ -13,6 +14,12 @@ const shopReducer = (state = initialState, action) => {
             ...state,
             products: action.payLoad
         }
+
+        case actionTypes.ADD_TO_WISHLIST: return {
+            ...state,
+            wishList: action.payLoad
+        }
+
         case actionTypes.ADD_TO_CART:
             // get the items from the product array    
             const item = state.products.find(product => product.id === action.payLoad.id);

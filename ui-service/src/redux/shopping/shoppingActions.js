@@ -8,6 +8,24 @@ export const setProducts = products => {
     }
 }
 
+export const addToWishlist = id => {
+    return {
+        type: actionTypes.ADD_TO_WISHLIST,
+        payLoad: {
+            id: id
+        }
+    }
+}
+
+export const removeFromWishlist = id => {
+    return {
+        type: actionTypes.REMOVE_FROM_WISHLIST,
+        payLoad: {
+            id: id
+        }
+    }
+}
+
 export const addToCart = id => {
     return {
         type: actionTypes.ADD_TO_CART,
