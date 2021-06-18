@@ -21,7 +21,7 @@ const ProductDetails = ({ item, addToCart }) => {
         productPrice: "",
         productImagePath: ""
     })
-    const [isLoading, setIsloading] = useState(true)
+    
     const [error, setError] = useState(null)
 
     const { id } = useParams();
@@ -44,7 +44,8 @@ const ProductDetails = ({ item, addToCart }) => {
                         productPrice: res.data.productPrice,
                         productImagePath: res.data.productImagePath
                     })
-                    setIsloading(false)
+                    
+                    
                 })
                 .catch(error => { setError("Does't exit this article") })
         }
@@ -53,16 +54,14 @@ const ProductDetails = ({ item, addToCart }) => {
 
     }, []);
 
-    if (isLoading) {
-        return <Loader />
-    }
+   
     return (
         <React.Fragment>
 
             <Row>
-                <p>{productDetails.productCategory.parentCategory.grandParentCategory.grandParentCategoryTitle}->
-                    {productDetails.productCategory.parentCategory.parentCategoryTitle}
-                    ->{productDetails.productCategory.categoryTitle}</p>
+                <p>{productDetails.productCategory ? productDetails.productCategory.parentCategory.grandParentCategory.grandParentCategoryTitle : "not set" }->
+                    {productDetails.productCategory ? productDetails.productCategory.parentCategory.parentCategoryTitle : "not set" }
+                    ->{productDetails.productCategory ? productDetails.productCategory.categoryTitle : "not set" }</p>
             </Row>
             <Row>
                 <Col xs={12} md={6} xl={6} lg={6}>
@@ -78,12 +77,12 @@ const ProductDetails = ({ item, addToCart }) => {
                     </div>
                 </Col>
                 <Col xs={12} md={6} xl={6} lg={6}>
-                    <h3 className="product-title">{productDetails.productTitle}</h3>
-                    <p>{productDetails.productCategory.categoryTitle}</p>
+                    <h3 className="product-title">{productDetails.productTitle ? productDetails.productTitle : "Title not found"}</h3>
+                    <p>{productDetails.productCategory ?  productDetails.productCategory.categoryTitle: "not set" }</p>
                     <p className="product-description">
-                        {productDetails.productDescription}
+                        {productDetails.productDescription ?productDetails.productDescription : ""}
                     </p>
-                    <h3 className="product-price">Price: &#2547;<span>{productDetails.productPrice}</span></h3>
+                    <h3 className="product-price">Price: &#2547;<span>{productDetails.productPrice ? productDetails.productPrice:""}</span></h3>
 
                     <div className="action">
                         <Button className="add-to-cart-btn" onClick={() => addToCart(productDetails.id)}>Add to Cart</Button>

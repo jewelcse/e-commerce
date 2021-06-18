@@ -1,4 +1,4 @@
-package com.productservice.controller;
+package com.productservice.exception;
 
 public class ResourceNotFoundException extends RuntimeException  {
 

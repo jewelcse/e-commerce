@@ -21,7 +21,7 @@ public class ProductServiceImp  implements ProductService{
 
     @Override
     public void removeProduct(Product product){
-        productRepository.delete(product);
+         productRepository.delete(product);
     }
 
     @Override

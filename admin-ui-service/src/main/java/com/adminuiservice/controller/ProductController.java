@@ -4,15 +4,21 @@ import com.adminuiservice.dto.Category;
 import com.adminuiservice.dto.Product;
 import com.adminuiservice.service.*;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.websocket.Decoder;
+import javax.websocket.Encoder;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Deflater;
 
 @Controller
 @RequestMapping("admin")
@@ -52,7 +58,7 @@ public class ProductController {
     }
 
     @PostMapping("/product/store")
-    public RedirectView save(@ModelAttribute("product") Product product){
+    public RedirectView save(@ModelAttribute("product") @RequestParam("productImagePath") MultipartFile file, Product product) throws IOException {
 
 
         System.out.println("saving.."+product);
@@ -60,6 +66,7 @@ public class ProductController {
         Category category = categoryService.getCategoryByTitle(product.getCategory().getCategoryTitle());
 
         product.setCategory(category);
+        product.setProductImagePath(compressBytes(file.getBytes()));
 
         System.out.println("admin controller" + product);
         ResponseEntity<Product> response = productService.storeProduct(product);
@@ -67,6 +74,27 @@ public class ProductController {
         System.out.println("Saving product => "+response);
 
         return new RedirectView("/admin/products");
+    }
+
+    // compress the image bytes before storing it in the database
+
+    public static byte[] compressBytes(byte[] data) {
+
+        Deflater deflater = new Deflater();
+        deflater.setInput(data);
+        deflater.finish();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        while (!deflater.finished()) {
+            int count = deflater.deflate(buffer);
+            outputStream.write(buffer, 0, count);
+        }
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+        }
+        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+        return outputStream.toByteArray();
     }
 
 

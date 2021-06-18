@@ -17,7 +17,7 @@ public class Product {
     private String productTitle;
     private Category category;
     private String productDescription;
-    private String productImagePath;
+    private byte[] productImagePath;
     private double productPrice;
 
 
