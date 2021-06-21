@@ -2,7 +2,6 @@ package com.customerservice.service;
 
 import com.customerservice.model.Customer;
 import com.customerservice.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,11 +10,14 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImp implements CustomerService {
 
-    @Autowired
     private CustomerRepository customerRepository;
 
+    public CustomerServiceImp(CustomerRepository customerRepository){
+        this.customerRepository = customerRepository;
+    }
+
     @Override
-    public Customer saveCustomer(Customer customer) {
+    public Customer saveOrUpdateCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
 

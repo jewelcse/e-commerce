@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface CustomerService {
 
-    public Customer saveCustomer(Customer customer);
+    public Customer saveOrUpdateCustomer(Customer customer);
     public void removeCustomer(String id);
     public Optional<Customer> findCustomerById(String id);
 }
