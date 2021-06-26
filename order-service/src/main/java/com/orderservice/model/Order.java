@@ -26,7 +26,7 @@ public class Order {
 
     private int quantity;
 
-    private double value;
+    private double totalCost;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
