@@ -9,19 +9,3 @@ spring:
     password: guest
 
 
-
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/product-service
-
-server:
-  port: 8300
-  servlet:
-    context-path: /api  
-  
-
-
-queue:
-  order-create: ORDER_CREATED_EVENT
-  order-done: ORDER_DONE_EVENT
-  order-canceled: ORDER_CANCELED_EVENT  

@@ -1,5 +1,6 @@
 package com.orderservice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -9,22 +10,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Document
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Order {
 
     @Id
-    private Long id;
+    private String id;
 
-	private List<Product> productsList;
+	private List<Product> products;
 	
 	private Customer customer;
 
-    private Long quantity;
+    private int quantity;
 
-    private BigDecimal value;
+    private double value;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
