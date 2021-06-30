@@ -1,4 +1,4 @@
-package com.orderservice.config;
+package com.paymentservice.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-public class OrderConfig {
+public class PaymentConfig {
     public static final String ORDER_CREATE_QUEUE = "Order Create Queue";
     public static final String ORDER_TOPIC = "Order Topic";
     public static final String ORDER_BILLED_QUEUE = "Order Billed Queue";

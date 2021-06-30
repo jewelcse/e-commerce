@@ -19,20 +19,11 @@ public class Order {
 
     @Id
     private String id;
-
 	private List<Product> products;
-	
 	private Customer customer;
-
     private int quantity;
+    private double totalAmount;
+    private Status status;
 
-    private double totalCost;
-
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
-
-    public enum OrderStatus {
-        PROCESSING, COMPLETED, CANCELED
-    }
 
 }

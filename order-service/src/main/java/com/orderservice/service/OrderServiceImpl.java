@@ -4,11 +4,13 @@ import com.orderservice.config.OrderConfig;
 import com.orderservice.dto.OrderDto;
 import com.orderservice.model.Order;
 import com.orderservice.model.Product;
+import com.orderservice.model.Status;
 import com.orderservice.repository.OrderRepository;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -28,30 +30,27 @@ public class OrderServiceImpl implements OrderService{
     public Order saveOrder(Order order) {
 
         List<Product> products= order.getProducts();
-
         double totalCost = products.stream().mapToDouble(product -> product.getProductPrice() * product.getQuantity()).sum();
-
         Integer totalQuantity = products.stream().mapToInt( product -> product.getQuantity()).sum();
 
-        order.setStatus(Order.OrderStatus.PROCESSING);
-        order.setTotalCost(totalCost);
-        order.setQuantity(totalQuantity);
+        String orderId = UUID.randomUUID().toString();
+        order.setId(orderId);
 
-        paymentPublish(order);
-        //System.out.println(order);
+        order.setStatus(Status.PROCESSING);
+        order.setTotalAmount(totalCost);
+        order.setQuantity(totalQuantity);
+        publishOrderForPayment(order);
+        System.out.println("[Creating Order] "+ order.getId());
         return orderRepository.save(order);
     }
 
-    private void paymentPublish(Order order) {
-
+    private void publishOrderForPayment(Order order) {
         orderDto = new OrderDto();
+        orderDto.setOrderId(order.getId());
+        orderDto.setStatus(order.getStatus());
         orderDto.setCustomerId(order.getCustomer().getCustomerId());
         orderDto.setAccountNumber(order.getCustomer().getAccountNumber());
-        orderDto.setQuantity(order.getQuantity());
-        orderDto.setCost(order.getTotalCost());
-
-
-        rabbitTemplate.convertAndSend(OrderConfig.ORDER_EXCHANGE,OrderConfig.ORDER_ROUTING_KEY,orderDto);
-
+        orderDto.setAmount(order.getTotalAmount());
+        rabbitTemplate.convertAndSend(OrderConfig.ORDER_CREATE_QUEUE,orderDto);
     }
 }

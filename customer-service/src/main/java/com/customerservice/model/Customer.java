@@ -20,7 +20,6 @@ public class Customer {
     private String customerLastName;
     private Long mobileNumber;
     private String customerEmail;
-
     private List<Address> address;
 
 }

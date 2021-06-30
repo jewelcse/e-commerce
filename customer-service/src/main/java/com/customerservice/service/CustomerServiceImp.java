@@ -8,6 +8,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -25,6 +26,8 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     public Customer saveOrUpdateCustomer(Customer customer) {
 
+        String id = UUID.randomUUID().toString();
+        customer.setCustomerId(id);
         customerRepository.save(customer);
         sendNotification(customer);
         return customer;
@@ -32,9 +35,12 @@ public class CustomerServiceImp implements CustomerService {
 
     private void sendNotification(Customer customer){
 
+        String notificationId = UUID.randomUUID().toString();
+
         Notification notification = new Notification();
+        notification.setNotificationId(notificationId);
         notification.setCustomerId(customer.getCustomerId());
-        notification.setNotificationMessage("Registration succesful for "
+        notification.setNotificationMessage("Registration successful for "
                 +customer.getCustomerFirstName() + " "
                 +customer.getCustomerLastName());
 

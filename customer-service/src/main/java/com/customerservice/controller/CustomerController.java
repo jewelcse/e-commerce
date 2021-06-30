@@ -22,7 +22,7 @@ public class CustomerController {
 
     @PostMapping("/save-customer")
     public ResponseEntity<Customer> createOrUpdateCustomer(@RequestBody Customer customer) throws RuntimeException{
-        return new ResponseEntity<>(customerServiceImp.saveOrUpdateCustomer(customer),HttpStatus.OK);
+        return new ResponseEntity<>(customerServiceImp.saveOrUpdateCustomer(customer),HttpStatus.CREATED);
     }
 
     @GetMapping("/remove-customer")

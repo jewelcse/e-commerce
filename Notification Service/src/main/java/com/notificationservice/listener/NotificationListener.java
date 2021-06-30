@@ -20,6 +20,7 @@ public class NotificationListener {
     @RabbitListener(queues = NotificationConfig.NOTIFICATION_QUEUE)
     public void getNotification(Notification notify) {
         Notification notification = new Notification();
+        notification.setNotificationId(notify.getNotificationId());
         notification.setCustomerId(notify.getCustomerId());
         notification.setNotificationMessage(notify.getNotificationMessage());
 

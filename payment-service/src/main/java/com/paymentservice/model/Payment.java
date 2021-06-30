@@ -11,11 +11,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Payment {
-
-
     @Id
     private String paymentId;
+    private String customerId;
+    private String transactionId;
     private double amount;
-    private Customer customer;
+    private PaymentStatus status;
+
 
 }
