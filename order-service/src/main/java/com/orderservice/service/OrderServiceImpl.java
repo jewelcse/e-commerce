@@ -10,6 +10,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -44,6 +45,8 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.save(order);
     }
 
+
+
     private void publishOrderForPayment(Order order) {
         orderDto = new OrderDto();
         orderDto.setOrderId(order.getId());
@@ -52,5 +55,10 @@ public class OrderServiceImpl implements OrderService{
         orderDto.setAccountNumber(order.getCustomer().getAccountNumber());
         orderDto.setAmount(order.getTotalAmount());
         rabbitTemplate.convertAndSend(OrderConfig.ORDER_CREATE_QUEUE,orderDto);
+    }
+
+    @Override
+    public Optional<Order> getOrder(String id) {
+        return orderRepository.findById(id);
     }
 }

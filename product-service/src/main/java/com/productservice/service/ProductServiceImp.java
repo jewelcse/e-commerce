@@ -7,15 +7,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductServiceImp  implements ProductService{
 
-    @Autowired
+
     private ProductRepository productRepository;
+
+    @Autowired
+    public ProductServiceImp(ProductRepository repository){
+        this.productRepository = repository;
+    }
+
 
     @Override
     public Product saveOrUpdateProduct(Product product) {
+        product.setId(UUID.randomUUID().toString());
         return productRepository.save(product);
     }
 
@@ -26,7 +34,8 @@ public class ProductServiceImp  implements ProductService{
 
     @Override
     public List<Product> getProducts() {
-        return  productRepository.findAllByOrderByIdDesc();
+        System.out.println("Fetching Data from Database");
+        return  productRepository.findAll();
     }
 
     @Override

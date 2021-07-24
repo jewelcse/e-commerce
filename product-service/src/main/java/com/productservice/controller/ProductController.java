@@ -5,6 +5,7 @@ import com.productservice.exception.ProductNotFoundException;
 import com.productservice.exception.ResourceNotFoundException;
 import com.productservice.service.ProductServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +18,18 @@ import java.util.*;
 @RequestMapping("/api")
 public class ProductController {
 
-    @Autowired
     private ProductServiceImp productService;
+
+    @Autowired
+    public ProductController(ProductServiceImp productService){
+        this.productService = productService;
+    }
 
 
     //@RabbitListener(queues = ProductConfig.PRODUCT_QUEUE)
     @PostMapping("/product/create")
     public ResponseEntity <Product> createProduct(@RequestBody Product product) throws RuntimeException{
-        return new ResponseEntity<>(productService.saveOrUpdateProduct(product), HttpStatus.OK);
+        return new ResponseEntity<>(productService.saveOrUpdateProduct(product), HttpStatus.CREATED);
     }
     /*
      Admin Endpoint for remove product
@@ -43,17 +48,18 @@ public class ProductController {
      */
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/products")
+    @Cacheable(value = "products")
     public ResponseEntity<List<Product>> getAllProduct(){
         return new ResponseEntity<>(productService.getProducts(),HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/product")
-    public ResponseEntity<Optional<Product>> getSingleProduct(@RequestParam String productId){
+    public ResponseEntity<Product> getSingleProduct(@RequestParam String productId){
         Product product = productService.getProductById(productId)
-                .orElseThrow(() -> new ProductNotFoundException("Product not found for this id :: " + productId));
+                .orElseThrow(() -> new ProductNotFoundException("Product not found for this id :" + productId));
 
-        return new ResponseEntity<>(Optional.of(product),HttpStatus.OK);
+        return new ResponseEntity<>(product,HttpStatus.OK);
     }
 
     @PostMapping("/update/product/{id}")

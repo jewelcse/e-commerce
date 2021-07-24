@@ -25,20 +25,15 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     public Customer saveOrUpdateCustomer(Customer customer) {
-
-        String id = UUID.randomUUID().toString();
-        customer.setCustomerId(id);
+        customer.setCustomerId(UUID.randomUUID().toString());
         customerRepository.save(customer);
         sendNotification(customer);
         return customer;
     }
 
     private void sendNotification(Customer customer){
-
-        String notificationId = UUID.randomUUID().toString();
-
         Notification notification = new Notification();
-        notification.setNotificationId(notificationId);
+        notification.setNotificationId(UUID.randomUUID().toString());
         notification.setCustomerId(customer.getCustomerId());
         notification.setNotificationMessage("Registration successful for "
                 +customer.getCustomerFirstName() + " "

@@ -58,7 +58,7 @@ public class ProductController {
     }
 
     @PostMapping("/product/store")
-    public RedirectView save(@ModelAttribute("product") @RequestParam("productImagePath") MultipartFile file, Product product) throws IOException {
+    public RedirectView save(@ModelAttribute("product") Product product) throws IOException {
 
 
         System.out.println("saving.."+product);
@@ -66,7 +66,7 @@ public class ProductController {
         Category category = categoryService.getCategoryByTitle(product.getCategory().getCategoryTitle());
 
         product.setCategory(category);
-        product.setProductImagePath(compressBytes(file.getBytes()));
+        //product.setProductImagePath(compressBytes(file.getBytes()));
 
         System.out.println("admin controller" + product);
         ResponseEntity<Product> response = productService.storeProduct(product);

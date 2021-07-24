@@ -29,6 +29,9 @@ public class PaymentCheckListener {
 
         String bankAccountNumber = orderDto.getAccountNumber();
         double totalCost = orderDto.getAmount();
+
+
+
         // bank api called with account number and total cost
 
         String transId = "1010";
@@ -38,7 +41,7 @@ public class PaymentCheckListener {
         payment.setCustomerId(orderDto.getCustomerId());
         payment.setTransactionId(transId);
 
-        Boolean result = false;
+        Boolean result = true;
         if (result) {
 
             orderDto.setStatus(OrderStatus.COMPLETED);
