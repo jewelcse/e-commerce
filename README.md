@@ -8,4 +8,4 @@ This repository not being updated for a long time. I have created several reposi
 # product-service https://github.com/jewelcse/product-service
 # order-service https://github.com/jewelcse/order-service
 # seller-service https://github.com/jewelcse/seller-service
-# payment-service 
+# payment-service https://github.com/jewelcse/payment-service
